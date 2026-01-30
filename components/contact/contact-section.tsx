@@ -1,20 +1,15 @@
 "use client";
 
 import { motion } from "motion/react";
-import { SocialLinks } from "./social-link";
+import { SocialLinks } from "@/components/home/social-link";
 import { Heading } from "@/components/ui/heading";
 import { SubHeading } from "@/components/ui/sub-heading";
 import { ContactForm } from "./contact-form";
 import { Contacts } from "./contacts";
 
-import type { ReactNode } from "react";
 import { ContactCta } from "./contact-cta";
 
-interface ContactSectionProps {
-  children?: ReactNode;
-}
-
-export default function ContactSection({ children }: ContactSectionProps) {
+export function ContactSection() {
   return (
     <section id="contact" className="py-20 px-6">
       <motion.div
@@ -31,8 +26,6 @@ export default function ContactSection({ children }: ContactSectionProps) {
       </motion.div>
 
       <div className="space-y-12">
-        {children}
-
         <SocialLinks />
         <ContactCta />
         <motion.div

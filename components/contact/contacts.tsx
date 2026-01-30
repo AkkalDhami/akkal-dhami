@@ -1,3 +1,5 @@
+"use client";
+
 import { User, Mail, Phone, MapPin } from "lucide-react";
 import { motion } from "motion/react";
 import type { Route } from "next";
