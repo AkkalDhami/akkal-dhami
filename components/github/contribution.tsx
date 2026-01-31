@@ -25,11 +25,9 @@ import { LoaderIcon } from "lucide-react";
 
 const YEARS = [
   { label: "Last Year", value: "last" },
+  { label: "2026", value: "2026" },
   { label: "2025", value: "2025" },
-  { label: "2024", value: "2024" },
-  { label: "2023", value: "2023" },
-  { label: "2022", value: "2022" },
-  { label: "2021", value: "2021" }
+  { label: "2024", value: "2024" }
 ];
 
 interface GithubContributionsProps {
@@ -82,10 +80,10 @@ export function GitHubContributionGraph({
             onValueChange={val => {
               if (val) setYear(val);
             }}>
-            <SelectTrigger className="h-8 w-[120px] text-xs">
+            <SelectTrigger className="h-6 w-[120px] text-xs">
               <SelectValue placeholder="Select Year" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className={"w-auto"}>
               {YEARS.map(y => (
                 <SelectItem key={y.value} value={y.value} className="text-xs">
                   {y.label}
@@ -98,12 +96,12 @@ export function GitHubContributionGraph({
           href="https://github.com/akkaldhami"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-primary hover:underline">
+          className="text-xs text-muted-primary underline-offset-2 underline hover:text-primary">
           View on GitHub
         </a>
       </div>
 
-      <div className="border border-neutral-200 dark:border-neutral-800 p-6 bg-secondary/10 relative min-h-[200px]">
+      <div className="border border-neutral-200 dark:border-neutral-800 p-4 bg-secondary/10 relative min-h-[200px]">
         {loading ? (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
