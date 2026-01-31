@@ -7,6 +7,8 @@ import { FlipWords } from "@/components/ui/flip-words";
 import { SocialLinks } from "./social-link";
 import { PrimaryButton } from "../ui/primary-button";
 import { CornerMarkers } from "../ui/corner-markers";
+import { TechBadge } from "../projects/tech-badge";
+import { HOME_PAGE_STACKS } from "@/utils/stack";
 
 const HERO_WORDS = [
   "Full-Stack JavaScript Engineer",
@@ -28,13 +30,13 @@ export function HeroSection() {
   return (
     <section
       id="about"
-      className="bg-background relative mt-20 flex min-h-[90vh] items-center justify-center overflow-hidden font-normal sm:px-4">
+      className="relative pt-20 flex items-center justify-center overflow-hidden font-normal sm:px-4">
       <div className="relative z-10 container mx-auto">
         <div className="mt-6 sm:mt-0">
           <motion.h1
             {...fadeUp}
             transition={{ delay: 0.2 }}
-            className="mb-5 text-3xl font-semibold tracking-tighter text-balance sm:text-3xl lg:text-4xl font-mono xl:text-5xl">
+            className="mb-5 text-3xl font-semibold tracking-tighter text-balance sm:text-3xl lg:text-4xl font-inter xl:text-5xl">
             Akkal Dhami
           </motion.h1>
 
@@ -53,20 +55,18 @@ export function HeroSection() {
             <motion.div
               {...fadeUp}
               transition={{ delay: 0.45 }}
-              className="text-muted-foreground mb-8 w-full max-w-xl text-lg leading-relaxed">
+              className="text-muted-foreground mb-6 w-full max-w-xl text-lg leading-relaxed">
               I design and build modern, high-performance web applications
               using:
               <br />
               <div className="flex mt-2 flex-wrap items-center gap-2">
-                {[
-                  "Next.js",
-                  "React.js",
-                  "TypeScript",
-                  "Node.js",
-                  "MongoDB",
-                  "MySQL"
-                ].map((tech, index) => (
-                  <TechStack key={index} tech={tech} />
+                {HOME_PAGE_STACKS.map(tech => (
+                  <TechBadge key={tech.value}>
+                    <div className="flex items-center gap-2">
+                      <tech.icon className="size-3" />
+                      {tech.label}
+                    </div>
+                  </TechBadge>
                 ))}
               </div>
               <span className="mt-2 inline-block">
@@ -78,7 +78,7 @@ export function HeroSection() {
             <motion.div
               {...fadeUp}
               transition={{ delay: 0.6 }}
-              className="flex mb-12 flex-wrap items-center gap-4 lg:justify-start">
+              className="flex mb-8 flex-wrap items-center gap-4 lg:justify-start">
               <PrimaryButton as="a" href="/projects">
                 View My Work
                 <CornerMarkers
@@ -102,13 +102,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function TechStack({ tech }: { tech: string }) {
-  return (
-    <span className="from-background to-card-hover text-accent-foreground mx-0.5 inline-flex items-center border border-dashed border-neutral-400 bg-linear-to-r px-1.5 text-base dark:border-neutral-500">
-      {tech}
-    </span>
   );
 }

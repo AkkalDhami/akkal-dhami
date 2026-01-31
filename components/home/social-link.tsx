@@ -14,25 +14,25 @@ const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
     href: "https://github.com/akkaldhami",
-    icon: "/github.webp",
+    icon: "/assets/icons/github.webp",
     username: "akkaldhami"
   },
   {
     name: "LinkedIn",
-    href: "https://github.com/akkaldhami",
-    icon: "/linkedin.webp",
+    href: "https://www.linkedin.com/in/akkal-dhami-854273378/",
+    icon: "/assets/icons/linkedin.webp",
     username: "@akkaldhami"
   },
   {
     name: "Twitter",
     href: "https://github.com/akkaldhami",
-    icon: "/x.webp",
+    icon: "/assets/icons/x.webp",
     username: "@akkaldhami"
   },
   {
     name: "Email",
     href: "mailto:dhamiakkal21@gmail",
-    icon: "/email.svg",
+    icon: "/assets/icons/email.svg",
     username: "aavashdhami21@gmail.com"
   }
 ];

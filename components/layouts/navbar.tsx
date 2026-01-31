@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
@@ -17,28 +17,25 @@ interface MenuItem {
   label: string;
   href: Route;
 }
+const menuItems: MenuItem[] = [
+  {
+    label: "Projects",
+    href: "/projects" as Route
+  },
+  {
+    label: "Experiments",
+    href: "/experiments" as Route
+  },
+  {
+    label: "Contacts",
+    href: "/contacts" as Route
+  }
+];
 
 export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const menuItems = useMemo<MenuItem[]>(
-    () => [
-      {
-        label: "About",
-        href: "/" as Route
-      },
-      {
-        label: "Projects",
-        href: "/projects" as Route
-      },
-      {
-        label: "Contact",
-        href: "/contact" as Route
-      }
-    ],
-    []
-  );
 
   const pathname = usePathname();
 

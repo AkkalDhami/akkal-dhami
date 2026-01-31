@@ -64,7 +64,7 @@ const DetailSwapCard = React.forwardRef<HTMLDivElement, DetailSwapCardProps>(
         <div
           ref={ref}
           className={cn(
-            "flex h-64 items-center justify-center rounded-md border text-sm text-muted-foreground",
+            "flex h-auto items-center justify-center text-sm text-muted-foreground",
             className
           )}>
           No images available
@@ -75,12 +75,12 @@ const DetailSwapCard = React.forwardRef<HTMLDivElement, DetailSwapCardProps>(
     return (
       <div
         ref={ref}
-        className={cn("w-full space-y-2 rounded-md p-4 max-w-96", className)}
+        className={cn("w-full space-y-2 p-4", className)}
         {...rest}>
         {/* Main image display */}
         <div
           className={cn(
-            "relative w-full overflow-hidden rounded-xl",
+            "relative w-full overflow-hidden",
             typeof imageHeight === "number"
               ? `h-[${imageHeight}px]`
               : `h-[${imageHeight}]`
@@ -125,7 +125,7 @@ const DetailSwapCard = React.forwardRef<HTMLDivElement, DetailSwapCardProps>(
               <Button
                 variant="secondary"
                 size="icon"
-                className="absolute left-2 top-1/2 size-8 -translate-y-1/2 rounded-md bg-black/40 text-white shadow-md hover:bg-black/60"
+                className="absolute rounded-none left-2 top-1/2 size-8 -translate-y-1/2 bg-black/40 text-white hover:bg-black/60"
                 onClick={handlePrevious}
                 disabled={isTransitioning}>
                 <ChevronLeft size={16} />
@@ -134,7 +134,7 @@ const DetailSwapCard = React.forwardRef<HTMLDivElement, DetailSwapCardProps>(
               <Button
                 variant="secondary"
                 size="icon"
-                className="absolute right-2 top-1/2 size-8 -translate-y-1/2 rounded-md bg-black/40 text-white shadow-md hover:bg-black/60"
+                className="absolute rounded-none right-2 top-1/2 size-8 -translate-y-1/2 bg-black/40 text-white hover:bg-black/60"
                 onClick={handleNext}
                 disabled={isTransitioning}>
                 <ChevronRight size={16} />
@@ -145,13 +145,13 @@ const DetailSwapCard = React.forwardRef<HTMLDivElement, DetailSwapCardProps>(
 
           {/* Dot Indicator */}
           {showDotIndicator && totalImages > 1 && (
-            <div className="absolute  bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 rounded-md bg-black/40 backdrop-blur-sm px-2 py-1 shadow-sm border border-white/20">
+            <div className="absolute  bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 bg-black/40 backdrop-blur-sm px-2 py-1">
               {images.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => handleImageChange(index)}
                   className={cn(
-                    "h-2 w-2 rounded-md transition-all duration-300 cursor-pointer",
+                    "h-2 w-2 transition-all duration-300 cursor-pointer",
                     activeIndex === index
                       ? "bg-white scale-110 ring-1 ring-white/50"
                       : "bg-white/60 hover:bg-white/80"
@@ -165,7 +165,7 @@ const DetailSwapCard = React.forwardRef<HTMLDivElement, DetailSwapCardProps>(
 
           {/* Image Counter */}
           {showImageCounter && (
-            <div className="absolute top-2 right-2 rounded-md bg-black/40 backdrop-blur-sm px-2 py-0.5 text-xs font-medium text-white border border-white/20">
+            <div className="absolute top-2 right-2 bg-black/40 backdrop-blur-sm px-2 py-0.5 text-xs font-medium text-white">
               {activeIndex + 1} / {totalImages}
             </div>
           )}
@@ -174,16 +174,16 @@ const DetailSwapCard = React.forwardRef<HTMLDivElement, DetailSwapCardProps>(
         {/* Thumbnail Navigator */}
         {showThumbnailNavigator && totalImages > 1 && (
           <ScrollArea className="w-full">
-            <div className="flex gap-2 px-1 pt-2 pb-2.5">
+            <div className="flex gap-6 px-1 pt-2 pb-2.5">
               {images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => handleImageChange(index)}
                   className={cn(
-                    "relative h-14 w-18 shrink-0 overflow-hidden rounded border transition-all duration-200 aspect-video",
+                    "relative w-26 shrink-0 overflow-hidden border transition-all duration-200 aspect-video p-2",
                     activeIndex === index
-                      ? "ring-1 ring-neutral-500/50 ring-offset-1"
-                      : "opacity-70 hover:opacity-100"
+                      ? "ring-1 ring-neutral-500 dark:ring-neutral-400 ring-offset-1"
+                      : "border border-neutral-500/50"
                   )}
                   disabled={isTransitioning}>
                   <Image
