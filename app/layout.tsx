@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 
 import { BackToTop } from "@/components/ui/back-to-top";
 import { Footer } from "@/components/layouts/footer";
+import { BgPattern } from "@/components/layouts/bg-pattern";
 
 export default function RootLayout({
   children
@@ -43,12 +44,13 @@ export default function RootLayout({
           disableTransitionOnChange>
           <ToastProvider position="top-center">
             <AnchoredToastProvider>
-              <main className="max-w-4xl px-4 mx-auto">
+              <main className="max-w-4xl min-h-screen relative bg-background mx-auto">
+                <Navbar />
                 {children}
                 <Footer />
-                <Navbar />
                 <BackToTop />
               </main>
+              <BgPattern />
             </AnchoredToastProvider>
           </ToastProvider>
         </ThemeProvider>
