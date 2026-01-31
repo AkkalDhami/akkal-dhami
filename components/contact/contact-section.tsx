@@ -5,13 +5,13 @@ import { SocialLinks } from "@/components/home/social-link";
 import { Heading } from "@/components/ui/heading";
 import { SubHeading } from "@/components/ui/sub-heading";
 import { ContactForm } from "./contact-form";
-import { Contacts } from "./contacts";
+import { ContactInfo } from "./contact-info";
 
 import { ContactCta } from "./contact-cta";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-20 px-6">
+    <section id="contact" className="py-16 px-6">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export function ContactSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Contacts />
+          <ContactInfo />
           <ContactForm />
         </motion.div>
       </div>

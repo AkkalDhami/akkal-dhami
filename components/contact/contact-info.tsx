@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import type { Route } from "next";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
+import { CornerMarkers } from "../ui/corner-markers";
 
 export const CONTACT_INFO = [
   {
@@ -36,7 +37,7 @@ export const CONTACT_INFO = [
   }
 ];
 
-export function Contacts() {
+export function ContactInfo() {
   return (
     <div className="space-y-6">
       <div>
@@ -50,9 +51,12 @@ export function Contacts() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="group relative">
+            className="relative">
+            <CornerMarkers offset={7} hoverOffset={0} />
             <div className="flex items-center gap-3">
-              <item.icon className="bg-muted/20 border border-border text-muted-primary p-2 size-11" />
+              <div className="relative">
+                <item.icon className="bg-muted/20 border border-border text-muted-primary p-2 size-11" />
+              </div>
               <div className="flex flex-col space-y-1 text-primary">
                 <span className="text-xs uppercase tracking-widest font-medium text-muted-foreground">
                   {item.label}

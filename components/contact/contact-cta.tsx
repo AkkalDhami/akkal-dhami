@@ -3,7 +3,7 @@ import { Heading } from "@/components/ui/heading";
 import { SubHeading } from "@/components/ui/sub-heading";
 import { PrimaryButton } from "@/components/ui/primary-button";
 import { CornerMarkers } from "@/components/ui/corner-markers";
-import { CONTACT_INFO } from "./contacts";
+import { CONTACT_INFO } from "./contact-info";
 
 export const EMAIL = CONTACT_INFO.find(
   info => info.label.toLowerCase() === "email"
@@ -34,7 +34,7 @@ export function ContactCta() {
           </PrimaryButton>
         </div>
       </div>
-      <CornerMarkers offset={7} hoverOffset={7} key={"primary-button"} />
+      <CornerMarkers offset={7} hoverOffset={0} className="text-primary" />
     </motion.div>
   );
 }
