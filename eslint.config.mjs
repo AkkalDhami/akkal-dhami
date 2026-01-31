@@ -19,7 +19,11 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "node_modules/**",
+    "commitlint.config.ts",
+    "commitlint.config.js",
+    "commitlint.config.cjs"
   ])
 ]);
 
