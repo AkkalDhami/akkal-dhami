@@ -12,6 +12,19 @@ export function BgPattern() {
         )}
       />
       <div className="pointer-events-none fixed inset-0 -z-10 flex items-center justify-center bg-white mask-[radial-gradient(ellipse_at_center,transparent_40%,black)] dark:bg-black" />
+
+      <div className="pointer-events-none fixed inset-0 -z-10 flex items-center justify-center font-mono text-5xl font-bold tracking-widest text-neutral-200 uppercase sm:text-8xl dark:text-neutral-900">
+        <p className="fixed top-1/2 left-26 flex -translate-y-1/2 flex-col gap-4">
+          {"Akkal".split("").map((char, index) => (
+            <span key={index}>{char}</span>
+          ))}
+        </p>
+        <p className="fixed top-1/2 right-26 flex -translate-y-1/2 flex-col gap-4">
+          {"Dhami".split("").map((char, index) => (
+            <span key={index}>{char}</span>
+          ))}
+        </p>
+      </div>
     </>
   );
 }

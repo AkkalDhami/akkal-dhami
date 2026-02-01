@@ -5,101 +5,105 @@ import { motion } from "motion/react";
 import { FlipWords } from "@/components/ui/flip-words";
 
 import { SocialLinks } from "./social-link";
-import { PrimaryButton } from "../ui/primary-button";
-import { CornerMarkers } from "../ui/corner-markers";
-import { TechBadge } from "../projects/tech-badge";
+import { PrimaryButton } from "@/components/ui/primary-button";
+import { CornerMarkers } from "@/components/ui/corner-markers";
+import { TechBadge } from "@/components/projects/tech-badge";
 import { HOME_PAGE_STACKS } from "@/utils/stack";
+import { NAME } from "@/lib/constants";
+import { NamePronoun } from "./name-pronoun";
 
 const HERO_WORDS = [
-  "Full-Stack JavaScript Engineer",
-  "Next.js & React Developer",
-  "Backend Engineer with Node & Express",
-  "TypeScript-First Developer",
-  "API Architect (REST & GraphQL)",
-  "Builder of Scalable Web Systems",
-  "Performance-Focused Web Engineer",
-  "Clean Code & System Design Advocate"
+  "systems that scale under pressure.",
+  "APIs for real-world traffic.",
+  "backend architecture that lasts.",
+  "code that stays maintainable.",
+  "performance-first systems."
 ];
 
 const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 }
+  initial: { opacity: 0, y: 20, filter: "blur(4px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" }
 };
 
 export function HeroSection() {
   return (
-    <section
-      id="about"
-      className="relative pt-20 flex items-center justify-center overflow-hidden font-normal sm:px-4">
-      <div className="relative z-10 container mx-auto">
-        <div className="mt-6 sm:mt-0">
+    <section id="about" className="relative z-10 mb-12 pt-20 font-normal">
+      <div className="mt-4 sm:mt-8">
+        <div className="mb-5 flex items-baseline-last gap-2">
           <motion.h1
             {...fadeUp}
-            transition={{ delay: 0.2 }}
-            className="mb-5 text-3xl font-semibold tracking-tighter text-balance sm:text-3xl lg:text-4xl font-inter xl:text-5xl">
-            Akkal Dhami
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="font-inter text-stroke text-stroke-primary text-3xl font-bold tracking-widest uppercase sm:text-3xl lg:text-4xl xl:text-6xl">
+            {NAME}
           </motion.h1>
+          <NamePronoun />
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mt-3 flex flex-col lg:text-left">
+          <motion.h2
+            {...fadeUp}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-muted-primary mb-6 text-lg font-medium md:text-xl">
+            I build <FlipWords words={HERO_WORDS} />
+          </motion.h2>
 
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mt-3 flex flex-col lg:text-left">
-            <motion.h2
-              {...fadeUp}
-              transition={{ delay: 0.3 }}
-              className="text-muted-primary mb-6 text-lg font-medium md:text-xl">
-              <FlipWords words={HERO_WORDS} />
-            </motion.h2>
-
-            <motion.div
-              {...fadeUp}
-              transition={{ delay: 0.45 }}
-              className="text-muted-foreground mb-6 w-full max-w-xl text-lg leading-relaxed">
-              I design and build modern, high-performance web applications
-              using:
-              <br />
-              <div className="flex mt-2 flex-wrap items-center gap-2">
-                {HOME_PAGE_STACKS.map(tech => (
-                  <TechBadge key={tech.value}>
-                    <div className="flex items-center gap-2">
-                      <tech.icon className="size-3" />
-                      {tech.label}
-                    </div>
-                  </TechBadge>
-                ))}
-              </div>
-              <span className="mt-2 inline-block">
-                My focus is clean architecture, scalable systems, and thoughtful
-                user experiences.
-              </span>
-            </motion.div>
-
-            <motion.div
-              {...fadeUp}
-              transition={{ delay: 0.6 }}
-              className="flex mb-8 flex-wrap items-center gap-4 lg:justify-start">
-              <PrimaryButton as="a" href="/projects">
-                View My Work
-                <CornerMarkers
-                  offset={7}
-                  hoverOffset={7}
-                  key={"primary-button"}
-                />
-              </PrimaryButton>
-              <PrimaryButton variant="outline" as="a" href="/resume.pdf">
-                Download Resume
-                <CornerMarkers
-                  offset={7}
-                  hoverOffset={7}
-                  key={"primary-button"}
-                />
-              </PrimaryButton>
-            </motion.div>
-
-            <SocialLinks />
+            {...fadeUp}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-muted-foreground mb-6 w-full text-lg leading-relaxed">
+            I design scalable web systems focused on performance,
+            maintainability, and real-world impact.
+            <br />
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              {HOME_PAGE_STACKS.map(tech => (
+                <TechBadge
+                  key={tech.value}
+                  className="border-neutral-400 py-1 dark:border-neutral-700">
+                  <div className="flex items-center gap-2">
+                    <tech.icon className="size-4" />
+                    {tech.label}
+                  </div>
+                </TechBadge>
+              ))}
+            </div>
           </motion.div>
-        </div>
+
+          <motion.div
+            {...fadeUp}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-4 mb-8 flex flex-wrap items-center gap-4 lg:justify-start">
+            <PrimaryButton
+              as="a"
+              href="/projects"
+              className="w-full py-3 sm:w-auto">
+              View My Work
+              <CornerMarkers
+                offset={7}
+                hoverOffset={7}
+                key={"primary-button"}
+              />
+            </PrimaryButton>
+            <PrimaryButton
+              variant="outline"
+              as="a"
+              href="/resume.pdf"
+              className="w-full py-3 sm:w-auto">
+              Download Resume
+              <CornerMarkers
+                offset={7}
+                hoverOffset={7}
+                key={"primary-button"}
+              />
+            </PrimaryButton>
+          </motion.div>
+
+          <div className="mt-6">
+            <SocialLinks minimal={false} className="gap-6" />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
