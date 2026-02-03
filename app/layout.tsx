@@ -1,9 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 import { Navbar } from "@/components/layouts/navbar";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { BackToTop } from "@/components/ui/back-to-top";
+import { Footer } from "@/components/layouts/footer";
+import { BgPattern } from "@/components/layouts/bg-pattern";
+import siteConfig from "@/lib/site";
+import { X_USERNAME } from "@/lib/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,14 +24,86 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"]
 });
-export const metadata: Metadata = {
-  title: "Akkal Dhami - Full Stack Developer",
-  description: "Akkal Dhami's Portfolio Website"
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" }
+  ],
+  width: "device-width",
+  initialScale: 1
 };
 
-import { BackToTop } from "@/components/ui/back-to-top";
-import { Footer } from "@/components/layouts/footer";
-import { BgPattern } from "@/components/layouts/bg-pattern";
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`
+  },
+  description: siteConfig.description,
+  keywords: [
+    "Akkal Dhami",
+    "Full Stack Developer",
+    "Backend Developer",
+    "Node.js Developer",
+    "Express.js Developer",
+    "React.js Developer",
+    "Next.js Developer",
+    "Software Engineer",
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "TypeScript",
+    "Nepal",
+    "Kathmandu",
+    "Web Development",
+    "Portfolio"
+  ],
+  authors: [
+    {
+      name: siteConfig.author,
+      url: siteConfig.url
+    }
+  ],
+  creator: siteConfig.author,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: "/images/og.png",
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: ["/images/og.png"],
+    creator: `@${X_USERNAME}`
+  },
+  icons: {
+    icon: "/favicon.ico"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  }
+};
 
 export default function RootLayout({
   children
@@ -36,7 +113,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} font-inter antialiased`}>
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} font-code antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

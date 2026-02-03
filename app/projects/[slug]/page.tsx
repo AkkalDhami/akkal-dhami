@@ -1,16 +1,52 @@
+import { Metadata } from "next";
 import { ProjectCard } from "@/components/projects/project-card";
 import { BackButton } from "@/components/shared/back-btn";
 import { CornerMarkers } from "@/components/ui/corner-markers";
 import { PrimaryButton } from "@/components/ui/primary-button";
 import { getPreviousAndNextProject, getProjectBySlug } from "@/utils/project";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { redirect } from "next/navigation";
+
+export async function generateMetadata(
+  props: PageProps<"/projects/[slug]">
+): Promise<Metadata> {
+  const { slug } = await props.params;
+  const project = getProjectBySlug(slug as string);
+
+  if (!project) {
+    return {
+      title: "Project Not Found"
+    };
+  }
+
+  return {
+    title: project.title,
+    description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      images: [
+        {
+          url: project.thumbnail,
+          alt: project.title
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+      images: [project.thumbnail]
+    }
+  };
+}
 
 export default async function Page(props: PageProps<"/projects/[slug]">) {
   const { slug } = await props.params;
   const project = getProjectBySlug(slug as string);
 
   if (!project) {
-    return <div>Project not found</div>;
+    redirect("/projects");
   }
 
   const { previousProject, nextProject } = getPreviousAndNextProject(
