@@ -7,7 +7,16 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
-  typedRoutes: true
+  typedRoutes: true,
+  redirects() {
+    return [
+      {
+        source: "/docs",
+        destination: "/docs/index",
+        permanent: true
+      }
+    ];
+  }
 };
 
 export default withMDX(nextConfig);

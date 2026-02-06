@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -232,6 +231,9 @@
   .primary-hover {
     @apply duration-300 hover:border-neutral-500 dark:hover:border-neutral-400;
   }
+  .bg-editor {
+    @apply bg-[#ffffff] dark:bg-[#101010];
+  }
 }
 
 .thin-scrollbar {
@@ -246,4 +248,18 @@
 
 .text-stroke-primary {
   -webkit-text-stroke: 2px var(--primary);
+}
+
+[data-rehype-pretty-code-figure] {
+  max-width: 760px;
+  /* width: 100%; */
+  position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
 }
