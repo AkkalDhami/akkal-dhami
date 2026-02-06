@@ -17,7 +17,7 @@ export const HeaderBadge: React.FC<HeaderBadgeProps> = ({
   return (
     <div
       className={cn(
-        "group shadow-tertiary bg-background relative mb-6 inline-flex items-center space-x-2 rounded-md border px-4 py-2 font-mono text-sm duration-300 hover:border-neutral-300 sm:text-base dark:border-neutral-700",
+        "group shadow-tertiary bg-background relative mb-6 inline-flex items-center space-x-2 border px-4 py-2 font-mono text-sm duration-300 hover:border-neutral-300 sm:text-base dark:border-neutral-700",
         className
       )}>
       {children}
