@@ -30,6 +30,10 @@ const menuItems: MenuItem[] = [
     href: "/dev-setup" as Route
   },
   {
+    label: "Playbook",
+    href: "/playbook" as Route
+  },
+  {
     label: "Contacts",
     href: "/contacts" as Route
   }
@@ -62,7 +66,7 @@ export function Navbar() {
         <Profile />
 
         {/* Desktop Navigation */}
-        <div className="border-border/60 bg-muted/50 hidden items-center gap-1 border p-1 backdrop-blur-md md:flex">
+        <div className="border-border/60 hidden items-center gap-1 border p-1 backdrop-blur-md md:flex">
           {menuItems.map((item, index) => {
             const isActive = isActiveLink(pathname, item.href);
             const isMoving =

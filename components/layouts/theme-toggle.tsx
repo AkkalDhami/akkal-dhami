@@ -13,16 +13,14 @@ export function ThemeToggle() {
 
   const toggleTheme = () => {
     setTheme(isDark ? "light" : "dark");
-    const audio = new Audio("/audio/audio.wav");
-    audio.play().catch(err => console.error("Error playing sound:", err));
   };
 
   return (
     <button
       onClick={toggleTheme}
       className={cn(
-        "relative group border-[1.5px] py-1.5 px-2 size-9 rounded-0 cursor-pointer transition-colors duration-300",
-        "bg-linear-to-r from-background to-card-hover hover:bg-secondary/80 border border-neutral-200 dark:border-neutral-800",
+        "group rounded-0 relative size-9 cursor-pointer border-[1.5px] px-2 py-1.5 transition-colors duration-300",
+        "from-background to-card-hover hover:bg-secondary/80 border border-neutral-200 bg-linear-to-r dark:border-neutral-800",
         "flex items-center justify-center",
         "hover:border-neutral-500 dark:hover:border-neutral-400"
       )}

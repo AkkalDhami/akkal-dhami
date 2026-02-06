@@ -86,8 +86,7 @@ export function SocialLinks({
                   />
                   <CornerMarkers offset={7} hoverOffset={3} />
                 </PrimaryButton>
-              }
-            />
+              }></TooltipTrigger>
             <TooltipContent>
               <p>{link.name}</p>
             </TooltipContent>

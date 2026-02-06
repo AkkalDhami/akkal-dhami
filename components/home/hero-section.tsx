@@ -14,10 +14,10 @@ import { NamePronoun } from "./name-pronoun";
 
 const HERO_WORDS = [
   "systems that scale under pressure.",
-  "APIs for real-world traffic.",
-  "backend architecture that lasts.",
-  "code that stays maintainable.",
-  "performance-first systems."
+  "APIs designed for real traffic.",
+  "backend architecture built to last.",
+  "codebases that stay maintainable.",
+  "performance-first engineering."
 ];
 
 const fadeUp = {
@@ -46,7 +46,7 @@ export function HeroSection() {
           <motion.h2
             {...fadeUp}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="text-muted-primary mb-6 text-lg font-medium md:text-xl">
+            className="text-muted-primary mb-6 hidden overflow-hidden text-lg font-medium sm:block md:text-xl">
             I build <FlipWords words={HERO_WORDS} />
           </motion.h2>
 
@@ -93,7 +93,7 @@ export function HeroSection() {
               rel="noopener noreferrer"
               href="/resume.pdf"
               className="w-full py-3 sm:w-auto">
-              Download Resume
+              View My Resume
               <CornerMarkers
                 offset={7}
                 hoverOffset={7}
