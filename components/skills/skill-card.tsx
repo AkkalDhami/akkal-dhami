@@ -17,7 +17,7 @@ function SkillCard({ skill, index }: { skill: IStack; index: number }) {
         "group/item flex items-center gap-2 border border-dashed border-neutral-400 p-2 transition-colors duration-200 dark:border-neutral-600",
         index % 2 === 0 ? "bg-linear-l" : "bg-linear-b"
       )}>
-      <div className="rounded-md p-1.5">
+      <div className="p-1.5">
         {typeOfSkillIcon === "icon" ? (
           <skill.icon className="text-accent-foreground size-5" />
         ) : (
