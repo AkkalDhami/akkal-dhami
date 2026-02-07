@@ -1,4 +1,3 @@
-
 # Akkal Dhami - Portfolio Website
 
 Welcome to the personal portfolio website of **Akkal Dhami**. This project showcases my skills, projects, and professional journey as a Full Stack Developer. Built with modern web technologies, it features a clean, responsive design and interactive elements.
@@ -30,18 +29,21 @@ This project is built using the latest web development tools and libraries:
 ### Prerequisites
 
 Ensure you have the following installed:
+
 - [Node.js](https://nodejs.org/) (v18 or higher)
 - [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/), or [bun](https://bun.sh/)
 
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/yourusername/akkal-dhami.git
    cd akkal-dhami
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    # or
@@ -51,6 +53,7 @@ Ensure you have the following installed:
    ```
 
 3. **Run the development server:**
+
    ```bash
    npm run dev
    ```

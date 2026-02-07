@@ -6,7 +6,7 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
-  pageExtensions: ["ts", "tsx", "mdx"],
+  pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
   typedRoutes: true,
   redirects() {
     return [
