@@ -6,6 +6,7 @@ import { PrimaryButton } from "@/components/ui/primary-button";
 import { getPreviousAndNextProject, getProjectBySlug } from "@/utils/project";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { redirect } from "next/navigation";
+import { Route } from "next";
 
 export async function generateMetadata(
   props: PageProps<"/projects/[slug]">
@@ -65,7 +66,7 @@ export default async function Page(props: PageProps<"/projects/[slug]">) {
             className="group px-4 py-2 font-medium tracking-normal capitalize"
             as="a"
             title={previousProject.title}
-            href={`/projects/${previousProject.slug}`}>
+            href={`/projects/${previousProject.slug}` as Route}>
             <div className="flex items-center gap-1">
               <ChevronLeft className="size-5" /> Previous Project
             </div>
@@ -82,7 +83,7 @@ export default async function Page(props: PageProps<"/projects/[slug]">) {
             className="group px-4 py-2 font-medium tracking-normal capitalize"
             as="a"
             title={nextProject.title}
-            href={`/projects/${nextProject.slug}`}>
+            href={`/projects/${nextProject.slug}` as Route}>
             <div className="flex items-center gap-1">
               Next Project <ChevronRight className="size-5" />
             </div>

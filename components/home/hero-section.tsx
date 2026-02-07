@@ -11,6 +11,7 @@ import { TechBadge } from "@/components/projects/tech-badge";
 import { HOME_PAGE_STACKS } from "@/utils/stack";
 import { NAME } from "@/lib/constants";
 import { NamePronoun } from "./name-pronoun";
+import { Route } from "next";
 
 const HERO_WORDS = [
   "systems that scale under pressure.",
@@ -91,7 +92,7 @@ export function HeroSection() {
               as="a"
               target="_blank"
               rel="noopener noreferrer"
-              href="/resume.pdf"
+              href={"/resume.pdf" as Route}
               className="w-full py-3 sm:w-auto">
               View My Resume
               <CornerMarkers
