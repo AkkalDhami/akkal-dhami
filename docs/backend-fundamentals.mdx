@@ -1,0 +1,232 @@
+---
+title: Backend Fundamentals
+description: Backend Fundamentals Interview Questions
+---
+
+# Backend Fundamentals
+
+## 1. How the Server Works (Request-Response Cycle)?
+
+A server works on the request-response model, where a client sends a request and the server processes it and sends back a response.
+
+When a client sends a request, the server receives it through a listening port. The request passes through middleware, reaches a route handler, executes business logic (possibly interacting with a database or external services), and then sends a response back to the client.
+
+Node.js handles request asynchronously using the event loop, process them through middleware & controllers and returns a response without blocking the other requests.
+
+<Note text="In short, a server listens for requests, processes them using middleware and business logic, interacts with the database if needed, and returns a structured response to the client." />
+
+## 2. REST API Design Principles
+
+REST API design principles are guidelines used to build **scalable**, **maintainable**, and **predictable** APIs.
+REST stands for **Representational State Transfer** and is based on stateless client-server communication.
+
+The key REST principles are:
+
+### I. Client-Server Architecture
+
+The client and server are separated.
+The client handles UI, and the server handles business logic and data.
+
+### II. Statelessness
+
+Each request must contain all required information.
+The server does not store client state between requests.
+
+### III. Resource-Based URLs
+
+APIs are designed around resources, not actions.
+For example:
+
+<Code children="/users" /> instead of <Code children="/getUsers" />
+
+### IV. Use of HTTP Methods Properly
+
+- <Code children="GET" /> → fetch data
+- <Code children="POST" /> → create data
+- <Code children="PUT/PATCH" /> → update data
+- <Code children="DELETE" /> → remove data
+
+### V. Standard HTTP Status Codes
+
+Use meaningful status codes like:
+
+- <Code children="200" />: OK
+- <Code children="201" />: Created
+- <Code children="204" />: No Content
+- <Code children="400" />: Bad Request
+- <Code children="401" />: Unauthorized
+- <Code children="403" />: Forbidden
+- <Code children="404" />: Not Found
+- <Code children="409" />: Too Many Requests
+- <Code children="500" />: Server Error
+
+### VI. Consistent Response Format
+
+Responses are usually in JSON, with a consistent structure.
+
+```json
+{
+  "success": true,
+  "message": "Fetched successfully",
+  "data": {...},
+  "statusCode": 200
+}
+```
+
+```json
+{
+  "success": false,
+  "message": "Internal Server Error",
+  "errors": [{...}],
+  "statusCode": 500
+}
+```
+
+### VII. Versioning
+
+APIs should be versioned to avoid breaking changes, for example:
+
+<Code children="api/v1/users" />, <Code children="api/v2/users" />.
+
+For detail information: [Rest API Basic](/docs/rest-api-basic)
+
+<Note text="REST API design principles focus on stateless communication, resource-based URLs, proper use of HTTP methods and status codes, and consistent JSON responses to build scalable and maintainable APIs." />
+
+## 3. HTTP Methods & Status Codes
+
+HTTP methods define what action the client wants to perform on a resource, while HTTP status codes indicate the result of that action.
+
+### Common HTTP Methods
+
+#### I. <Code children="GET"/>: Fetch data from the server
+
+- Read-only, no side effects
+- Example: GET <Code children="/users" />
+
+#### II. <Code children="POST"/>: Create new data
+
+- Sends data in request body
+- Example: POST <Code children="/users" />
+
+#### III. <Code children="PUT"/>: Update an entire resource
+
+- Replaces existing data
+- Example: PUT <Code children="/users/1" />
+
+#### IV. <Code children="PATCH"/>: Update part of a resource
+
+- Partial update
+- Example: PATCH <Code children="/users/1" />
+
+#### V. <Code children="DELETE"/>: Remove a resource
+
+- Example: DELETE <Code children="/users/1" />
+
+### Common HTTP Status Codes
+
+- **200** OK - Successful request
+- **201** Created - Resource created
+- **204** No Content - Success with no response body
+- **400** Bad Request - Client error (invalid input)
+- **401** Unauthorized - Not authenticated
+- **403** Forbidden - Authenticated but not allowed
+- **404** Not Found - Resource doesn't exist
+- **409** Conflict - Resource state conflict
+- **500** Internal Server Error - Server-side failure
+
+```ts
+export const STATUS_CODES = {
+  // 2xx Success
+  OK: 200,
+  CREATED: 201,
+  ACCEPTED: 202,
+  NO_CONTENT: 204,
+
+  // 3xx Redirection
+  MOVED_PERMANENTLY: 301,
+  FOUND: 302,
+  NOT_MODIFIED: 304,
+
+  // 4xx Client Errors
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  UNPROCESSABLE_ENTITY: 422,
+  TOO_MANY_REQUESTS: 429,
+
+  // 5xx Server Errors
+  INTERNAL_SERVER_ERROR: 500,
+  NOT_IMPLEMENTED: 501,
+  BAD_GATEWAY: 502,
+  SERVICE_UNAVAILABLE: 503,
+  GATEWAY_TIMEOUT: 504
+} as const;
+
+export type StatusCode = (typeof STATUS_CODES)[keyof typeof STATUS_CODES];
+```
+
+<Note text="HTTP methods define the action like GET, POST, PUT, PATCH, and DELETE, while status codes like 200, 201, 400, 401, and 500 indicate the result of the request." />
+
+## 4. Middleware & Request Flow
+
+Middleware in Node.js is a function that sits between the incoming request and the final response.
+It has access to the request object, response object, and the **next()** function.
+
+**Request Flow in Node.js (Express):**
+
+#### I. A client sends an HTTP request to the server.
+
+#### II. The request first passes through middleware functions such as:
+
+- Logging
+- Authentication
+- Validation
+- Parsing JSON
+
+#### III. Each middleware can:
+
+- Modify req or res
+- End the request-response cycle
+- Or pass control to the next middleware using **next()**
+
+#### IV. Once all middleware runs, the request reaches the **route handler or controller**, where business logic is executed.
+
+#### V. Finally, the server sends a response back to the client.
+
+<Note text="Middleware is a function that runs before the request reaches the controller. It can modify the request, validate data, handle auth, or pass control using next()." />
+
+## 4. Authentication vs Authorization
+
+Authentication and authorization are both security concepts, but they serve different purposes.
+Authentication always comes first. Authorization depends on authenticated identity.
+
+### I. Authentication
+
+Authentication verifies who the user is (login, tokens, OAuth).
+
+**Examples:**
+
+- Login using email and password
+- JWT or session-based login
+- OAuth login (Google, GitHub)
+
+**_Authentication answers: “Who are you?”_**
+
+### I. Authorization
+
+Authorization determines what the user can access (roles, permissions).
+
+**Examples:**
+
+- Access control (admin vs user)
+- Permission-based routes
+- Role-based access control (RBAC)
+
+**_Authorization answers: “What are you allowed to do?”_**
+
+<Note
+  text="First, authentication middleware verifies the user (for example, by validating a JWT).
+Then, authorization middleware checks roles or permissions before allowing access to a route."
+/>

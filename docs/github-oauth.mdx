@@ -1,0 +1,251 @@
+---
+title: GitHub OAuth
+description: How I implement GitHub OAuth in a Node.js + TypeScript backend using Passport.
+---
+
+## What this covers
+
+A practical GitHub OAuth flow using **Passport**, designed for **stateless APIs**.  
+This focuses on configuration, routing, and controller logic — not theory.
+
+## Stack
+
+- Node.js
+- Express
+- TypeScript
+- passport
+- passport-github2
+
+## GitHub OAuth Setup
+
+1. Go to your [GitHub Settings](https://github.com/settings/profile)
+2. Developer settings -> OAuth Apps -> New OAuth App
+3. Fill in the required information
+4. Set **Homepage URL** to <Code children="http://localhost:9000" /> (or your production URL)
+5. Set **Authorization callback URL** to <Code children="http://localhost:9000/api/auth/github/callback" /> (or your production URL)
+6. Register application
+7. Generate a **Client Secret**
+8. Copy the **Client ID** and **Client Secret**
+
+## Step 1: Install packages
+
+- ### Dependencies
+
+<PackageManagerTabs command="npm install passport passport-github2 dotenv" />
+
+- ### TypeScript types
+
+<PackageManagerTabs
+  command="npm install -D @types/passport @types/passport-github2
+"
+/>
+
+## Step 2: Environment variables
+
+Add the following to your <Code children=".env" /> file:
+
+```bash
+GITHUB_CLIENT_ID="your-github-client-id"
+GITHUB_CLIENT_SECRET="your-github-client-secret"
+GITHUB_REDIRECT_URI="your-github-redirectUri"
+```
+
+## Step 3: Environment Configuration
+
+**MVC:** <Code children="src/configs/env.ts" />
+
+```ts
+import "dotenv/config";
+
+interface Config {
+  PORT: number;
+  NODE_ENV: string;
+  LOG_LEVEL: string;
+
+  GITHUB_CLIENT_ID: string;
+  GITHUB_CLIENT_SECRET: string;
+  GITHUB_REDIRECT_URI: string;
+}
+
+const env: Config = {
+  PORT: Number(process.env.PORT) || 1111,
+  NODE_ENV: process.env.NODE_ENV || "development",
+  LOG_LEVEL: process.env.LOG_LEVEL || "info",
+
+  GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID!,
+  GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET!,
+  GITHUB_REDIRECT_URI: process.env.GITHUB_REDIRECT_URI!
+};
+
+export default env;
+```
+
+## Step 4: GitHub OAuth strategy
+
+<Code children="src/configs/passport.ts" />
+
+```ts
+import passport from "passport";
+import { Strategy as GitHubStrategy, Profile } from "passport-github2";
+import env from "./env";
+
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+      callbackURL: env.GITHUB_REDIRECT_URI
+    },
+    function (
+      accessToken: string,
+      refreshToken: string,
+      profile: Profile,
+      cb: (error: Error | null, user?: any) => void
+    ) {
+      // console.log({ profile });
+      return cb(null, profile);
+    }
+  )
+);
+```
+
+## Step 5: OAuth controller
+
+<Code children="src/controllers/oauth.controller.ts" /> **or**
+<Code children="src/controllers/auth.controller.ts" />
+
+```ts
+import { NextFunction, Request, Response } from "express";
+import { Profile } from "passport-github2";
+
+import { ApiResponse } from "../utils/api-response";
+import { AsyncHandler } from "../utils/async-handler";
+import { ApiError } from "../utils/api-error";
+
+//? login with github
+export const githubOAuth = AsyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const data = req.user as Profile | undefined;
+
+    if (!data) {
+      return next(ApiError.unauthorized("Authenticated failed!"));
+    }
+
+    const user = {
+      provider: data?.provider,
+      providerId: data.id,
+      name: data.displayName,
+      email: data?.emails && data?.emails[0]?.value,
+      isEmailVerified: true,
+      avatar: data.photos && data.photos[0].value
+    };
+
+    // Persist user here (DB)
+
+    ApiResponse.ok(res, "Auth Successfull", {
+      user
+    });
+  }
+);
+```
+
+## Step 6: OAuth routes
+
+<Code children="src/routes/oauth.routes.ts" /> **or**
+<Code children="src/routes/auth.routes.ts" />
+
+```ts
+import { Router } from "express";
+import passport from "passport";
+import { githubOAuth } from "../controllers/github-oauth.controller";
+
+const router = Router();
+
+router.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    failureRedirect: "/login", //? redirect route if authenticated is failed,
+    session: false
+  }),
+  githubOAuth
+);
+
+export default router;
+```
+
+## Step 7: Mount routes
+
+<Code children="src/routes/index.ts" />
+
+```ts
+import { Router } from "express";
+import OAuthRoutes from "./oauth.routes";
+
+const router = Router();
+
+router.use("/oauth", OAuthRoutes);
+
+export default router;
+```
+
+## Step 8: Initialize passport
+
+<Code children="src/app.ts" />
+
+```ts
+import "./configs/passport";
+```
+
+```ts
+import express, { Express, Request, Response } from "express";
+
+import { notFoundHandler } from "./middlewares/not-found-handler";
+import { errorHandler } from "./middlewares/error-handler";
+
+import Routes from "./routes/index";
+
+import "./configs/passport";
+
+const app: Express = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use("/api", Routes);
+
+// Not found handler (should be after routes)
+app.use(notFoundHandler);
+
+// Global error handler (should be last)
+app.use(errorHandler);
+
+export default app;
+```
+
+## Success Response
+
+```json
+{
+  "success": true,
+  "message": "Auth Successfull",
+  "statusCode": 200,
+  "data": {
+    "user": {
+      "provider": "github",
+      "providerId": "170957638",
+      "name": "Akkal Dhami",
+      "email": "dhamiakkal21@gmail.com",
+      "isEmailVerified": true,
+      "avatar": "https://avatars.githubusercontent.com/u/170957638?v=4"
+    }
+  }
+}
+```
+
+This response is formated by <Code children="ApiResponse" /> component.
