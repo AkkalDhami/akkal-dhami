@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { CornerMarkers } from "../ui/corner-markers";
+import { CornerMarkers } from "@/components/ui/corner-markers";
 
 export interface Tech {
   name: string;

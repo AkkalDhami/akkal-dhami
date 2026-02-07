@@ -5,7 +5,7 @@ import { Heading } from "@/components/ui/heading";
 import { SubHeading } from "@/components/ui/sub-heading";
 import { PROJECTS } from "@/data/projects";
 import { ProjectCard } from "@/components/projects/project-card";
-import { PrimaryButton } from "../ui/primary-button";
+import { PrimaryButton } from "@/components/ui/primary-button";
 
 const fadeInUp = {
   initial: { y: 40, opacity: 0 },
@@ -19,6 +19,7 @@ const stagger = {
     }
   }
 };
+
 export const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",

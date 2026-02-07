@@ -38,15 +38,17 @@ export function Footer() {
                 Navigation
               </h4>
               <ul className="space-y-2">
-                {["Home", "Projects", "Dev-Setup", "Contacts"].map(item => (
-                  <li key={item}>
-                    <Link
-                      href={`/${item.toLowerCase()}` as Route}
-                      className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                      {item.replaceAll("-", " ")}
-                    </Link>
-                  </li>
-                ))}
+                {["Home", "Projects", "Dev-Setup", "Playbook", "Contacts"].map(
+                  item => (
+                    <li key={item}>
+                      <Link
+                        href={`/${item.toLowerCase()}` as Route}
+                        className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                        {item.replaceAll("-", " ")}
+                      </Link>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>
@@ -59,7 +61,7 @@ export function Footer() {
 
           <div className="flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
             <p className="text-muted-foreground text-sm">
-              &copy; {currentYear} {NAME}. All rights reserved.
+              &copy; {currentYear} | {NAME} | All rights reserved
             </p>
 
             <div className="text-muted-foreground flex items-center gap-2 text-sm font-medium">

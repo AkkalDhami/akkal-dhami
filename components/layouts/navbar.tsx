@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 
 import type { Route } from "next";
 import { isActiveLink } from "@/utils/link";
-import { PrimaryButton } from "../ui/primary-button";
+import { PrimaryButton } from "@/components/ui/primary-button";
 import { GITHUB_URL, NAME } from "@/lib/constants";
 import { SiGithub } from "react-icons/si";
 

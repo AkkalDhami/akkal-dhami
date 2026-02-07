@@ -12,9 +12,9 @@ export function BackButton() {
         router.back();
       }}
       variant="secondary"
-      className="py-2 px-4 group">
+      className="group px-4 py-2">
       <div className="flex items-center gap-2">
-        <ArrowLeft className="group-hover:-translate-x-1 transition-all" /> Go
+        <ArrowLeft className="transition-all group-hover:-translate-x-1" /> Go
         Back
       </div>
     </PrimaryButton>

@@ -5,13 +5,13 @@ export function Profile() {
   return (
     <Link
       href="/"
-      className="flex items-center ring-1 ring-neutral-500/70 justify-center">
+      className="flex items-center justify-center ring-1 ring-neutral-500/70">
       <Image
         src="/images/profile.jpg"
         alt="Profile"
         width={50}
         height={50}
-        className="rounded-none size-10 p-0.5 object-left object-cover"
+        className="size-10 rounded-none object-cover object-left p-0.5"
       />
     </Link>
   );
