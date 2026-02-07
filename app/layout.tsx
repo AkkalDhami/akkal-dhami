@@ -41,24 +41,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`
   },
   description: siteConfig.description,
-  keywords: [
-    "Akkal Dhami",
-    "Full Stack Developer",
-    "Backend Developer",
-    "Node.js Developer",
-    "Express.js Developer",
-    "React.js Developer",
-    "Next.js Developer",
-    "Software Engineer",
-    "React",
-    "Next.js",
-    "Tailwind CSS",
-    "TypeScript",
-    "Nepal",
-    "Kathmandu",
-    "Web Development",
-    "Portfolio"
-  ],
+  keywords: siteConfig.keywords,
   authors: [
     {
       name: siteConfig.author,

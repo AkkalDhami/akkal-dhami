@@ -15,6 +15,7 @@ import { PLAYBOOK_DATA } from "@/data/playbook";
 import { IPlaybook } from "@/types/app.types";
 import { CornerMarkers } from "@/components/ui/corner-markers";
 import { PrimaryButton } from "@/components/ui/primary-button";
+import siteConfig from "@/lib/site";
 
 export const revalidate = false;
 export const dynamic = "force-dynamic";
@@ -39,45 +40,35 @@ export async function generateMetadata(props: {
   const filePath = getDocPath(slug);
   if (!fs.existsSync(filePath)) {
     return {
-      title: "Not Found | ServerCN Docs"
+      title: "Not Found | Playbook"
     };
   }
 
   const source = fs.readFileSync(filePath, "utf8");
   const { data } = matter(source);
   return {
-    title: `${data.title}  | Playbook ` ?? "Playbook",
-    description:
-      data.description ??
-      "ServerCN documentation for building modern Node.js backends.",
-    keywords: data.keywords ?? [
-      "ServerCN",
-      "ServerCN Docs",
-      "ServerCN Documentation",
-      "ServerCN Backend",
-      "ServerCN Backend Documentation"
-    ],
+    title: `${data.title}  | Playbook `,
+    description: data.description ?? "Playbook",
+    keywords: siteConfig.keywords,
     openGraph: {
-      title: data.title ?? "ServerCN Docs",
-      description:
-        data.description ??
-        "ServerCN documentation for backend components and guides.",
+      title: `${data.title}  | Playbook `,
+      description: data.description ?? "Playbook",
       url: `/docs/${slug.length > 0 ? slug.join("/") : ""}`,
-      siteName: "ServerCN",
+      siteName: siteConfig.name,
       type: "article",
       images: [
         {
-          url: "/og-image.png",
+          url: "/images/og.png",
           width: 1200,
           height: 630,
-          alt: "ServerCN Docs"
+          alt: siteConfig.name
         }
       ]
     },
     twitter: {
       card: "summary_large_image",
-      title: data.title ?? "ServerCN Docs",
-      description: data.description ?? "ServerCN backend documentation."
+      title: data.title ?? "Playbook",
+      description: data.description ?? "Playbook"
     }
   };
 }
