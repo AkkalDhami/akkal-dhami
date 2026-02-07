@@ -5,8 +5,13 @@ import type { ComponentPropsWithoutRef } from "react";
 import React from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import type { UrlObject } from "url";
+import type { Route } from "next";
 
 type ButtonVariant = "outline" | "default" | "secondary";
+const MotionLink = motion(Link);
+// ✅ correct href type for Next.js
+type Href = Route | UrlObject;
 
 type BaseProps = {
   children: React.ReactNode;
@@ -21,9 +26,9 @@ type ButtonProps = BaseProps &
   };
 
 type AnchorProps = BaseProps &
-  ComponentPropsWithoutRef<typeof motion.a> & {
+  Omit<ComponentPropsWithoutRef<typeof motion.a>, "href"> & {
     as: "a";
-    href: string;
+    href: Href;
   };
 
 type PrimaryButtonProps = ButtonProps | AnchorProps;
@@ -44,31 +49,24 @@ export function PrimaryButton({
     className
   );
 
-  const Content = (
-    <>
-      <span>{children}</span>
-    </>
-  );
+  const Content = <span>{children}</span>;
 
   if (props.as === "a") {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { as: _as, href, ...anchorProps } = props;
+    const { as, href, ...anchorProps } = props;
+
     return (
-      <Link
-        href={href}
-        className={commonStyles}
-        {...(anchorProps as ComponentPropsWithoutRef<typeof motion.a>)}>
+      <MotionLink href={href} className={commonStyles} {...anchorProps}>
         {Content}
-      </Link>
+      </MotionLink>
     );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { as: _as, ...buttonProps } = props as ButtonProps;
+  const { as, ...buttonProps } = props;
+
   return (
-    <motion.button
-      className={commonStyles}
-      {...(buttonProps as ComponentPropsWithoutRef<typeof motion.button>)}>
+    <motion.button className={commonStyles} {...buttonProps}>
       {Content}
     </motion.button>
   );

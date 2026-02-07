@@ -11,6 +11,13 @@
     "format:fix": "npx prettier . --write",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.mdx": "prettier --write"
+  },
   "dependencies": {
     "@base-ui/react": "^1.1.0",
     "@next/mdx": "^16.1.6",
