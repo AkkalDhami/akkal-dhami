@@ -240,6 +240,10 @@
   scrollbar-width: thin;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .text-stroke {
   -webkit-text-stroke: 2px var(--muted-tertiary);
   color: transparent;
@@ -251,10 +255,35 @@
 }
 
 [data-rehype-pretty-code-figure] {
-  max-width: 730px;
+  max-width: 720px;
   width: 100%;
   position: relative;
+  overflow: auto;
+  margin-top: 4px;
 }
+
+code {
+  counter-reset: line;
+}
+
+code > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: gray;
+}
+
+/* code[data-line-numbers-max-digits="23"] > [data-line]::before {
+  width: 2rem;
+}
+
+code[data-line-numbers-max-digits="33"] > [data-line]::before {
+  width: 3rem;
+} */
 
 @media (prefers-color-scheme: dark) {
   code[data-theme*=" "],

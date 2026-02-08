@@ -80,8 +80,7 @@ const getPrettyCodeOptions = (theme: string) => ({
   },
   keepBackground: true,
   defaultLang: "plaintext",
-  grid: true,
-  lineNumbers: true
+  grid: true
 });
 
 function getDocPath(slug?: string[]) {
@@ -133,9 +132,9 @@ export default async function DocsPage(props: PageProps<"/docs/[[...slug]]">) {
           <NextSteps next={next} prev={prev} />
         </div>
       </div>
-      <aside className="thin-scrollbar docs-content bg-background sticky top-16 z-1 hidden max-h-[calc(100vh-2rem)] min-w-64 shrink-0 overflow-y-auto px-4 xl:block">
+      {/* <aside className="thin-scrollbar docs-content bg-background sticky top-16 z-1 hidden max-h-[calc(100vh-2rem)] min-w-64 shrink-0 overflow-y-auto px-4 xl:block">
         <OnThisPage />
-      </aside>
+      </aside> */}
     </div>
   );
 }
