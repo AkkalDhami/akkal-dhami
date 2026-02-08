@@ -26,7 +26,7 @@ export const mdxComponents: MDXComponents = {
   p: props => <p className="text-muted-primary my-2 leading-7" {...props} />,
   code: props => (
     <code
-      className="thin-scrollbar max-h-120 max-w-[200px] overflow-x-auto px-3 py-2.5 font-mono leading-relaxed sm:max-w-[680px]"
+      className="thin-scrollbar max-h-120 max-w-[200px] overflow-x-auto px-3 py-2.5 font-mono leading-relaxed sm:max-w-[720px]"
       {...props}
     />
   ),

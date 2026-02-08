@@ -15,7 +15,7 @@ export default function CopyButton({
     <button
       aria-label={copied ? "Copied" : "Copy to clipboard"}
       className={cn(
-        "focus-visible:border-ring group focus-visible:ring-ring/50 absolute right-0 flex h-auto w-9 cursor-pointer items-center justify-center p-1 transition-[color,box-shadow] outline-none hover:text-white focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed",
+        "focus-visible:border-ring group focus-visible:ring-ring/50 absolute right-0 flex h-auto w-9 cursor-pointer items-center justify-center transition-[color,box-shadow] outline-none hover:text-white focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed",
         "duration-100 ease-in-out",
         copied ? "text-white" : "text-neutral-400 dark:text-neutral-400",
         "py-1",

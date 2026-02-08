@@ -20,14 +20,15 @@ import {
   TooltipContent,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-type SocialLink = {
+
+export type SocialLink = {
   name: string;
   href: string;
   icon: string;
   username: string;
 };
 
-const socialLinks: SocialLink[] = [
+export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
     href: GITHUB_URL,

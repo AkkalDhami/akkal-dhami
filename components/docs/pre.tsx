@@ -28,7 +28,7 @@ export function Pre({
   }
 
   return (
-    <div className="relative overflow-x-auto sm:w-full sm:max-w-[680px]">
+    <div className="relative overflow-x-auto sm:w-full sm:max-w-[720px]">
       <pre
         ref={ref}
         {...props}
@@ -39,7 +39,7 @@ export function Pre({
         <CopyButton
           handleCopy={copy}
           copied={copied}
-          className="absolute right-2 bottom-3 z-20 flex items-center justify-center py-2 transition-all hover:text-white"
+          className="absolute right-4 bottom-3 z-20 flex items-center justify-center py-2 transition-all hover:text-white"
         />
         {children}
       </pre>

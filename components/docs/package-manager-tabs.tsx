@@ -25,7 +25,7 @@ export default async function PackageManagerTabs({
       style={{
         backgroundColor: bg
       }}
-      className={"mt-4 max-w-[680px]"}>
+      className={"mt-4 max-w-[720px]"}>
       <TabsList variant="underline" className={"pl-4"}>
         <TerminalIcon className="mr-4 size-5 text-neutral-400" />
         {Object.keys(managers).map(m => (
@@ -33,7 +33,7 @@ export default async function PackageManagerTabs({
             key={m}
             value={m}
             className={cn(
-              "flex items-center gap-2 font-medium text-neutral-400 hover:text-white dark:text-neutral-400"
+              "dark:data-active:text-foreground flex items-center gap-2 font-medium text-neutral-400 hover:text-white data-active:text-white dark:text-neutral-400 dark:hover:text-white"
             )}
             style={{ backgroundColor: bg }}>
             {m}
