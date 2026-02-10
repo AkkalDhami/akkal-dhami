@@ -25,7 +25,7 @@ export default async function PackageManagerTabs({
       style={{
         backgroundColor: bg
       }}
-      className={"mt-4 max-w-[720px]"}>
+      className={"mt-4 max-w-[272.5px] sm:max-w-180"}>
       <TabsList variant="underline" className={"pl-4"}>
         <TerminalIcon className="mr-4 size-5 text-neutral-400" />
         {Object.keys(managers).map(m => (

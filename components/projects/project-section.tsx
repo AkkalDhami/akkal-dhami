@@ -12,7 +12,7 @@ const fadeInUp = {
   animate: { y: 0, opacity: 1 }
 };
 
-const stagger = {
+export const stagger = {
   animate: {
     transition: {
       staggerChildren: 0.15

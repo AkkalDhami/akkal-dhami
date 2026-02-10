@@ -28,7 +28,7 @@ export function Pre({
   }
 
   return (
-    <div className="relative overflow-x-auto sm:w-full sm:max-w-[720px]">
+    <div className="relative max-w-[272.5px] overflow-x-auto sm:w-full sm:max-w-180">
       <pre
         ref={ref}
         {...props}

@@ -35,8 +35,8 @@ const menuItems: MenuItem[] = [
     href: "/playbook" as Route
   },
   {
-    label: "Contacts",
-    href: "/contacts" as Route
+    label: "Templates",
+    href: "/templates" as Route
   }
 ];
 

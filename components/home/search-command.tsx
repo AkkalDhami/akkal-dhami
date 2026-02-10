@@ -12,6 +12,7 @@ import {
 import { HiOutlineCube } from "react-icons/hi";
 import { LiaLaptopCodeSolid } from "react-icons/lia";
 import { HiOutlineSquare3Stack3D } from "react-icons/hi2";
+import { LuLayoutTemplate } from "react-icons/lu";
 import { Fragment, useEffect, useState } from "react";
 import {
   Command,
@@ -86,6 +87,12 @@ export const navigations: Item[] = [
     icon: RiBookOpenLine,
     label: "PlayBook",
     value: "/playbook",
+    link: true
+  },
+  {
+    icon: LuLayoutTemplate,
+    label: "Templates",
+    value: "/templates",
     link: true
   },
   {
