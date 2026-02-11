@@ -19,6 +19,7 @@ import { SiGithub } from "react-icons/si";
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { TECH_ICONS, TechStack } from "@/utils/icon-map";
@@ -239,59 +240,65 @@ export function ProjectLinks({
     return (
       <div className="flex items-center gap-4">
         {project.liveUrl && (
-          <Tooltip>
-            <TooltipTrigger
-              className={baseClassName}
-              render={
-                <Link
-                  href={project.liveUrl as Route}
-                  target="_blank"
-                  className={linkClassName}
-                  title="Live Demo">
-                  <LinkIcon className="size-4" />
-                </Link>
-              }
-            />
-            <TooltipContent>
-              <p>Live Demo</p>
-            </TooltipContent>
-          </Tooltip>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger
+                className={baseClassName}
+                render={
+                  <Link
+                    href={project.liveUrl as Route}
+                    target="_blank"
+                    className={linkClassName}
+                    title="Live Demo">
+                    <LinkIcon className="size-4" />
+                  </Link>
+                }
+              />
+              <TooltipContent>
+                <p>Live Demo</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         )}
         {project.githubUrl && (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger
+                className={baseClassName}
+                render={
+                  <Link
+                    href={project.githubUrl as Route}
+                    target="_blank"
+                    className={linkClassName}
+                    title="Source Code">
+                    <SiGithub className="size-4" />
+                  </Link>
+                }
+              />
+              <TooltipContent>
+                <p>Source Code</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
+        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger
               className={baseClassName}
               render={
                 <Link
-                  href={project.githubUrl as Route}
-                  target="_blank"
+                  href={`/projects/${project.slug}`}
                   className={linkClassName}
-                  title="Source Code">
-                  <SiGithub className="size-4" />
+                  title="Project Details">
+                  <ArrowUpRight className="size-4" />
                 </Link>
               }
             />
             <TooltipContent>
-              <p>Source Code</p>
+              <p>Project Details</p>
             </TooltipContent>
           </Tooltip>
-        )}
-        <Tooltip>
-          <TooltipTrigger
-            className={baseClassName}
-            render={
-              <Link
-                href={`/projects/${project.slug}`}
-                className={linkClassName}
-                title="Project Details">
-                <ArrowUpRight className="size-4" />
-              </Link>
-            }
-          />
-          <TooltipContent>
-            <p>Project Details</p>
-          </TooltipContent>
-        </Tooltip>
+        </TooltipProvider>
       </div>
     );
   }

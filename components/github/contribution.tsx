@@ -22,6 +22,7 @@ import {
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { format } from "date-fns";
@@ -107,23 +108,25 @@ export function GitHubContributionGraph({
               className="no-scrollbar px-2"
               title="GitHub Contributions">
               {({ activity, dayIndex, weekIndex }) => (
-                <Tooltip>
-                  <TooltipTrigger render={<g />}>
-                    <ContributionGraphBlock
-                      activity={activity}
-                      dayIndex={dayIndex}
-                      weekIndex={weekIndex}
-                    />
-                  </TooltipTrigger>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger render={<g />}>
+                      <ContributionGraphBlock
+                        activity={activity}
+                        dayIndex={dayIndex}
+                        weekIndex={weekIndex}
+                      />
+                    </TooltipTrigger>
 
-                  <TooltipContent className="font-sans">
-                    <p>
-                      {activity.count} contribution
-                      {activity.count > 1 ? "s" : null} on{" "}
-                      {format(new Date(activity.date), "yyyy-MM-dd")}
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
+                    <TooltipContent className="font-sans">
+                      <p>
+                        {activity.count} contribution
+                        {activity.count > 1 ? "s" : null} on{" "}
+                        {format(new Date(activity.date), "yyyy-MM-dd")}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               )}
             </ContributionGraphCalendar>
             <ContributionGraphFooter className="mt-4 text-sm">

@@ -1,12 +1,6 @@
 import { IPlaybook } from "@/types/app.types";
 import { PLAYBOOK_DATA } from "@/data/playbook";
 
-export const RESTRICTED_FOLDER_STRUCTURE_PAGES = [
-  "installation",
-  "introduction",
-  "project-structure"
-];
-
 export const findNeighbour = (
   slug: string
 ): { prev: IPlaybook | undefined; next: IPlaybook | undefined } => {
@@ -18,9 +12,6 @@ export const findNeighbour = (
       next: undefined
     };
   }
-
-  // const sameTypeItems = PLAYBOOK_DATA
-  //   .sort((a, b) => a.title.localeCompare(b.title));
 
   const index = PLAYBOOK_DATA.findIndex(item => item.slug === slug);
 

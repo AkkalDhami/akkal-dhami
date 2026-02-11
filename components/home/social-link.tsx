@@ -18,6 +18,7 @@ import { CornerMarkers } from "@/components/ui/corner-markers";
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
 
@@ -66,32 +67,35 @@ export function SocialLinks({
     return (
       <div className={cn("flex items-center gap-4", className)}>
         {socialLinks.map(link => (
-          <Tooltip key={link.name}>
-            <TooltipTrigger
-              render={
-                <PrimaryButton
-                  as="a"
-                  variant="outline"
-                  href={link.href as Route}
-                  target="_blank"
-                  className="group relative px-1.5 py-1">
-                  <Image
-                    src={link.icon}
-                    alt={link.name}
-                    width={24}
-                    height={24}
-                    className={cn(
-                      "size-7",
-                      link.name.toLocaleLowerCase() === "email" && "dark:invert"
-                    )}
-                  />
-                  <CornerMarkers offset={7} hoverOffset={3} />
-                </PrimaryButton>
-              }></TooltipTrigger>
-            <TooltipContent>
-              <p>{link.name}</p>
-            </TooltipContent>
-          </Tooltip>
+          <TooltipProvider key={link.name}>
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <PrimaryButton
+                    as="a"
+                    variant="outline"
+                    href={link.href as Route}
+                    target="_blank"
+                    className="group relative px-1.5 py-1">
+                    <Image
+                      src={link.icon}
+                      alt={link.name}
+                      width={24}
+                      height={24}
+                      className={cn(
+                        "size-7",
+                        link.name.toLocaleLowerCase() === "email" &&
+                          "dark:invert"
+                      )}
+                    />
+                    <CornerMarkers offset={7} hoverOffset={3} />
+                  </PrimaryButton>
+                }></TooltipTrigger>
+              <TooltipContent>
+                <p>{link.name}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ))}
       </div>
     );
