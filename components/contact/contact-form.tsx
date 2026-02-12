@@ -151,7 +151,7 @@ export function ContactForm() {
         <Textarea
           id="message"
           name="message"
-          className="max-h-[100px] resize-none"
+          className="max-h-25 resize-none"
           placeholder="Briefly describe your project or inquiry..."
           value={formData.message}
           onChange={handleChange}

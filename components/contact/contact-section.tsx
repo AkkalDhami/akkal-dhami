@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { SocialLinks } from "@/components/home/social-link";
 import { Heading } from "@/components/ui/heading";
 import { SubHeading } from "@/components/ui/sub-heading";
 import { ContactForm } from "./contact-form";
@@ -26,7 +25,6 @@ export function ContactSection() {
       </motion.div>
 
       <div className="space-y-12">
-        <SocialLinks />
         <ContactCta />
         <motion.div
           initial={{ opacity: 0, y: 40 }}
