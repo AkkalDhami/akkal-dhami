@@ -3,13 +3,15 @@ import { HeroSection } from "@/components/home/hero-section";
 import { GitHubContributions } from "@/components/github";
 import { ProjectsSection } from "@/components/projects/project-section";
 import { SkillsSection } from "@/components/skills/skill-section";
+import { PlaybookSection } from "@/components/playbook/playbook-section";
 
 export default async function Page() {
   return (
     <div className="relative px-4">
       <HeroSection />
-      <ProjectsSection />
+      <ProjectsSection home />
       <GitHubContributions />
+      <PlaybookSection home />
       <SkillsSection />
       <ContactSection />
     </div>

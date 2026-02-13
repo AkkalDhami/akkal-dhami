@@ -208,7 +208,7 @@ export function SearchCommand() {
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen(open => !open);
       }
@@ -228,7 +228,7 @@ export function SearchCommand() {
             <CornerMarkers offset={7} hoverOffset={3} key={"primary-button"} />
             <KbdGroup>
               <Kbd>⌘</Kbd>
-              <Kbd>J</Kbd>
+              <Kbd>K</Kbd>
             </KbdGroup>
           </PrimaryButton>
         }></CommandDialogTrigger>
