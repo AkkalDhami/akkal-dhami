@@ -27,7 +27,13 @@ export const formatDate = (dateString: string) => {
   });
 };
 
-export function ProjectsSection({ details = false }: { details?: boolean }) {
+export function ProjectsSection({
+  details = false,
+  home = false
+}: {
+  details?: boolean;
+  home?: boolean;
+}) {
   return (
     <section id="projects" className="min-h-screen py-12">
       <motion.div
@@ -49,7 +55,7 @@ export function ProjectsSection({ details = false }: { details?: boolean }) {
         whileInView="animate"
         viewport={{ once: true }}
         className="grid grid-cols-1 gap-8">
-        {PROJECTS.map(project => (
+        {(home ? PROJECTS.slice(0, 7) : PROJECTS).map(project => (
           <motion.div key={project.slug} variants={fadeInUp} className="group">
             <ProjectCard project={project} details={details} />
           </motion.div>
