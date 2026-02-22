@@ -36,7 +36,7 @@ export function HeroSection() {
           <motion.h1
             {...fadeUp}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-inter text-3xl font-medium tracking-wide uppercase sm:text-4xl lg:text-6xl xl:text-7xl">
+            className="font-inter text-4xl font-medium tracking-wide uppercase sm:text-5xl lg:text-6xl xl:text-7xl">
             {NAME}
           </motion.h1>
           <NamePronoun />
@@ -64,7 +64,7 @@ export function HeroSection() {
               {HOME_PAGE_STACKS.map(tech => (
                 <TechBadge
                   key={tech.value}
-                  className="border-neutral-400 py-1 dark:border-neutral-700">
+                  className="rounded-primary border-neutral-400 py-1 dark:border-neutral-700">
                   <div className="flex items-center gap-2">
                     <tech.icon className="size-4" />
                     {tech.label}
@@ -81,7 +81,7 @@ export function HeroSection() {
             <PrimaryButton
               as="a"
               href="/projects"
-              className="w-full py-3 sm:w-auto">
+              className="rounded-primary w-full py-3 sm:w-auto">
               View My Work
               <CornerMarkers
                 offset={7}
@@ -95,7 +95,7 @@ export function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               href={"/resume.pdf" as Route}
-              className="w-full py-3 sm:w-auto">
+              className="rounded-primary w-full py-3 sm:w-auto">
               View My Resume
               <CornerMarkers
                 offset={7}

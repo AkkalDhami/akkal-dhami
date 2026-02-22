@@ -45,7 +45,7 @@ export function BackToTop() {
             aria-label="Back to top">
             <ArrowUp className="size-5" />
             <CornerMarkers
-              hoverOffset={3}
+              hoverOffset={4}
               className="group-hover:text-primary"
             />
           </Button>
