@@ -118,7 +118,7 @@ export function Navbar() {
             className="relative px-2 py-2 transition-colors">
             <SiGithub className="size-5" />
 
-            <CornerMarkers offset={7} hoverOffset={3} key={"primary-button"} />
+            <CornerMarkers offset={7} hoverOffset={4} key={"primary-button"} />
           </PrimaryButton>
           <ThemeToggle />
           <PrimaryButton
@@ -145,7 +145,7 @@ export function Navbar() {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="bg-background border-border fixed top-0 right-0 bottom-0 z-50 h-screen w-[280px] overflow-y-auto border-l md:hidden">
+                className="bg-background border-border fixed top-0 right-0 bottom-0 z-50 h-screen w-70 overflow-y-auto border-l md:hidden">
                 <div className="flex h-full flex-col p-6">
                   <div className="mb-8 flex items-center justify-between">
                     <span className="text-muted-foreground text-xs font-medium tracking-[0.2em] uppercase">

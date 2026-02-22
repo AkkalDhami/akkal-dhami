@@ -13,7 +13,7 @@ export function Footer() {
     <>
       <footer className="mt-20 px-4 pb-6">
         <div className="border-border/40 relative border-t px-2 py-6">
-          <div className="mb-12 flex flex-wrap items-center justify-between gap-12">
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-12">
             <div className="space-y-6">
               <div className="flex items-center gap-3">
                 <Profile />
@@ -54,7 +54,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-center text-4xl font-bold tracking-widest text-neutral-300 uppercase sm:text-6xl xl:text-7xl dark:text-neutral-800">
+            <p className="mask-b-from-0.5 text-center text-3xl font-bold tracking-widest text-neutral-300 uppercase sm:text-6xl xl:text-8xl dark:text-neutral-700">
               {NAME}
             </p>
           </div>
