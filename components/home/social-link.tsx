@@ -1,16 +1,17 @@
 import {
-  EMAIL,
+  DAILY_DEV_URL,
+  DAILY_DEV_USERNAME,
   GITHUB_URL,
   GITHUB_USERNAME,
   LINKEDIN_URL,
   LINKEDIN_USERNAME,
-  SECONDARY_EMAIL,
   X_URL,
   X_USERNAME
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { LuArrowUpRight } from "react-icons/lu";
+import { SiDailydotdev } from "react-icons/si";
 import { PrimaryButton } from "@/components/ui/primary-button";
 import { Route } from "next";
 import { CornerMarkers } from "@/components/ui/corner-markers";
@@ -23,7 +24,6 @@ import {
 
 import { RiLinkedinFill, RiGithubFill, RiTwitterXFill } from "react-icons/ri";
 import { IconType } from "react-icons";
-import { MailIcon } from "lucide-react";
 
 export type SocialLink = {
   name: string;
@@ -37,7 +37,7 @@ export const socialLinks: SocialLink[] = [
     name: "GitHub",
     href: GITHUB_URL,
     icon: RiGithubFill,
-    username: GITHUB_USERNAME
+    username: `@${GITHUB_USERNAME}`
   },
   {
     name: "LinkedIn",
@@ -52,10 +52,10 @@ export const socialLinks: SocialLink[] = [
     username: `@${X_USERNAME}`
   },
   {
-    name: "Email",
-    href: `mailto:${EMAIL}`,
-    icon: MailIcon,
-    username: SECONDARY_EMAIL
+    name: "daily.dev",
+    href: DAILY_DEV_URL,
+    icon: SiDailydotdev,
+    username: `@${DAILY_DEV_USERNAME}`
   }
 ];
 
@@ -109,7 +109,7 @@ export function SocialLinks({
             rel="noopener noreferrer"
             className="hover:bg-card-hover group primary-border relative flex w-full gap-3 rounded-none border-[1.5px] px-3 py-3 text-center">
             <CornerMarkers offset={7} hoverOffset={6} />
-            <div className="bg-muted p-2">
+            <div className="p-2">
               <social.icon className="text-muted-foreground group-hover:text-primary size-8" />
             </div>
             <div className="flex w-full flex-col items-start">

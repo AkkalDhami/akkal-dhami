@@ -5,9 +5,7 @@ import {
   RiBookOpenLine,
   RiHome4Line,
   RiPhoneLine,
-  RiLinkedinFill,
-  RiGithubFill,
-  RiTwitterXFill
+  RiGithubFill
 } from "react-icons/ri";
 import { HiOutlineCube } from "react-icons/hi";
 import { LiaLaptopCodeSolid } from "react-icons/lia";
@@ -41,10 +39,11 @@ import { PLAYBOOK_DATA } from "@/data/playbook";
 import { CONTACT_INFO } from "@/components/contact/contact-info";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { GITHUB_URL, LINKEDIN_URL, X_URL } from "@/lib/constants";
+import { GITHUB_URL } from "@/lib/constants";
 import { LuMoonStar } from "react-icons/lu";
 import { useTheme } from "next-themes";
 import { TEMPLATE_DATA } from "../templates/template-section";
+import { socialLinks } from "./social-link";
 
 export interface Item {
   value: string;
@@ -145,29 +144,15 @@ export const contacts: Item[] = CONTACT_INFO.filter(
   };
 });
 
-export const socials: Item[] = [
-  {
-    value: GITHUB_URL,
-    label: "GitHub",
-    icon: RiGithubFill,
+export const socials: Item[] = socialLinks.map(s => {
+  return {
+    value: s.href,
+    label: `${s.name}`,
+    icon: s.icon,
     link: true,
     newTab: true
-  },
-  {
-    value: LINKEDIN_URL,
-    label: "LinkedIn",
-    icon: RiLinkedinFill,
-    link: true,
-    newTab: true
-  },
-  {
-    value: X_URL,
-    label: "Twitter",
-    icon: RiTwitterXFill,
-    link: true,
-    newTab: true
-  }
-];
+  };
+});
 
 export const others: Item[] = [
   {
