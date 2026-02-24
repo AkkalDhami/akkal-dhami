@@ -11,16 +11,13 @@ export function PlaybookCard({ data, i }: { data: IPlaybook; i: number }) {
       transition={{ delay: i * 0.1 }}
       viewport={{ once: true }}
       className="group hover:bg-card-hover relative border p-3 duration-300">
-      <h2 className="text-muted-primary mb-2 text-lg font-medium">
+      <h2 className="text-muted-primary group-hover:text-foreground mb-2 text-lg font-medium underline-offset-3 group-hover:underline">
         {data.title}
       </h2>
       {data.description && (
         <p className="text-muted-foreground line-clamp-3">{data.description}</p>
       )}
-      <CornerMarkers offset={8} hoverOffset={4} key={data.slug} className="" />
-      <div className="text-muted-secondary group-hover:text-foreground mt-4 flex items-center text-sm font-medium duration-300 group-hover:underline">
-        View docs
-      </div>
+      <CornerMarkers offset={8} hoverOffset={6} key={data.slug} />
     </motion.a>
   );
 }

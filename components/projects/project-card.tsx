@@ -236,7 +236,7 @@ export function ProjectLinks({
     const baseClassName =
       "px-3 border border-neutral-500/40 bg-transparent py-2 flex items-center justify-center";
     const linkClassName =
-      "text-muted-foreground bg-muted p-2 transition-colors hover:text-foreground hover:bg-muted duration-300";
+      "text-muted-foreground relative bg-muted p-2 transition-colors hover:text-foreground hover:bg-muted duration-300";
     return (
       <div className="flex items-center gap-4">
         {project.liveUrl && (
@@ -248,9 +248,13 @@ export function ProjectLinks({
                   <Link
                     href={project.liveUrl as Route}
                     target="_blank"
-                    className={linkClassName}
-                    title="Live Demo">
+                    className={linkClassName}>
                     <LinkIcon className="size-4" />
+                    <CornerMarkers
+                      offset={7.5}
+                      hoverOffset={0}
+                      className="text-muted-primary"
+                    />
                   </Link>
                 }
               />
@@ -269,9 +273,13 @@ export function ProjectLinks({
                   <Link
                     href={project.githubUrl as Route}
                     target="_blank"
-                    className={linkClassName}
-                    title="Source Code">
+                    className={linkClassName}>
                     <SiGithub className="size-4" />
+                    <CornerMarkers
+                      offset={7.5}
+                      hoverOffset={0}
+                      className="text-muted-primary"
+                    />
                   </Link>
                 }
               />
@@ -288,9 +296,13 @@ export function ProjectLinks({
               render={
                 <Link
                   href={`/projects/${project.slug}`}
-                  className={linkClassName}
-                  title="Project Details">
+                  className={linkClassName}>
                   <ArrowUpRight className="size-4" />
+                  <CornerMarkers
+                    offset={7.5}
+                    hoverOffset={0}
+                    className="text-muted-primary"
+                  />
                 </Link>
               }
             />

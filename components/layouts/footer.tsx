@@ -38,17 +38,22 @@ export function Footer() {
                 Navigation
               </h4>
               <ul className="space-y-2">
-                {["Home", "Projects", "Dev-Setup", "Playbook", "Contacts"].map(
-                  item => (
-                    <li key={item}>
-                      <Link
-                        href={`/${item.toLowerCase()}` as Route}
-                        className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                        {item.replaceAll("-", " ")}
-                      </Link>
-                    </li>
-                  )
-                )}
+                {[
+                  "Home",
+                  "Projects",
+                  "Templates",
+                  "Dev-Setup",
+                  "Playbook",
+                  "Contact"
+                ].map(item => (
+                  <li key={item}>
+                    <Link
+                      href={`/${item.toLowerCase()}` as Route}
+                      className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                      {item.replaceAll("-", " ")}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
