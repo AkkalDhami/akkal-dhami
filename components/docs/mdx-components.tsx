@@ -4,6 +4,8 @@ import { Pre } from "./pre";
 import PackageManagerTabs from "./package-manager-tabs";
 import Code from "./custom-code";
 import Note from "./note";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
 export const mdxComponents: MDXComponents = {
   pre: Pre,
@@ -46,5 +48,29 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  strong: props => <strong className="text-primary" {...props} />
+  strong: props => <strong className="text-primary" {...props} />,
+  blockquote: ({ className, ...props }: React.ComponentProps<"blockquote">) => (
+    <blockquote
+      className={cn("mt-6 border-l-2 pl-6 italic", className)}
+      {...props}
+    />
+  ),
+  Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
+    <h3
+      className={cn(
+        "text-primary mt-8 mb-3 scroll-m-32 text-xl font-medium tracking-tight",
+        className
+      )}
+      {...props}
+    />
+  ),
+  Steps: ({ className, ...props }: React.ComponentProps<"div">) => (
+    <div
+      className={cn(
+        "[&>h3]:step steps mb-12 [counter-reset:step] md:ml-4 md:border-l md:pl-8",
+        className
+      )}
+      {...props}
+    />
+  )
 };

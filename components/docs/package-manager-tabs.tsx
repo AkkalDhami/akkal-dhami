@@ -5,6 +5,7 @@ import { CodeWrapper } from "./code-wrapper";
 import { TerminalIcon } from "lucide-react";
 import { CODE_THEME_BG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { CornerMarkers } from "../ui/corner-markers";
 const bg = CODE_THEME_BG;
 
 const managers = {
@@ -25,7 +26,12 @@ export default async function PackageManagerTabs({
       style={{
         backgroundColor: bg
       }}
-      className={"mt-4 max-w-[272.5px] sm:max-w-180"}>
+      className={"relative mt-4 max-w-[272.5px] pt-2 sm:max-w-180"}>
+      <CornerMarkers
+        offset={9}
+        hoverOffset={4}
+        className="text-muted-primary"
+      />
       <TabsList variant="underline" className={"pl-4"}>
         <TerminalIcon className="mr-4 size-5 text-neutral-400" />
         {Object.keys(managers).map(m => (
