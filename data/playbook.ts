@@ -1,13 +1,6 @@
 import { IPlaybook } from "@/types/app.types";
 
 export const PLAYBOOK_DATA = [
-  // {
-  //   slug: "google-oauth",
-  //   title: "Google OAuth",
-  //   description:
-  //     "A production-focused implementation of Google OAuth using Node.js and TypeScript.",
-  //   docs: "/docs/google-oauth"
-  // },
   {
     slug: "rest-api-basic",
     title: "REST API Design Principles",
@@ -23,8 +16,8 @@ export const PLAYBOOK_DATA = [
     docs: "/docs/http-status-codes"
   },
   {
-    slug: "backend-fundamentals",
-    title: "Backend Fundamentals",
+    slug: "backend-fundamentals-01",
+    title: "Backend Fundamentals: 01",
     description:
       "Backend fundamentals encompass the core concepts and technologies that form the foundation of backend development, including server architecture, databases, APIs, and security.",
     docs: "/docs/backend-fundamentals"
@@ -35,5 +28,12 @@ export const PLAYBOOK_DATA = [
     description:
       "An end-to-end GitHub OAuth flow designed for scalable backend systems.",
     docs: "/docs/github-oauth"
+  },
+  {
+    slug: "google-oauth",
+    title: "Google OAuth",
+    description:
+      "An end-to-end Google OAuth flow designed for scalable backend systems.",
+    docs: "/docs/google-oauth"
   }
 ] satisfies IPlaybook[];
