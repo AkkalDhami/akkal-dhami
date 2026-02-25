@@ -45,7 +45,7 @@ export function PlaybookSection({ home = false }: { home?: boolean }) {
         whileInView="animate"
         viewport={{ once: true }}
         className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-        {(home ? PLAYBOOK_DATA.slice(0, 6) : PLAYBOOK_DATA).map(
+        {(home ? PLAYBOOK_DATA.slice(0, 4) : PLAYBOOK_DATA).map(
           (playbook: IPlaybook, i: number) => (
             <PlaybookCard data={playbook} i={i} key={playbook.slug} />
           )

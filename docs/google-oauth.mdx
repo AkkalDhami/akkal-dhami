@@ -1,0 +1,262 @@
+---
+title: Google OAuth
+description: How I implement Google OAuth in a Node.js + TypeScript backend using Passport.
+---
+
+## What this covers
+
+A practical Google OAuth flow using **Passport**, designed for **stateless APIs**.  
+This focuses on configuration, routing, and controller logic — not theory.
+
+## Stack
+
+- Node.js
+- Express
+- TypeScript
+- passport
+- passport-google2
+
+## Google OAuth Setup
+
+1. Go to your [Google Settings](https://google.com/settings/profile)
+2. Developer settings -> OAuth Apps -> New OAuth App
+3. Fill in the required information
+4. Set **Homepage URL** to <Code children="http://localhost:9000" /> (or your production URL)
+5. Set **Authorization callback URL** to <Code children="http://localhost:9000/api/auth/google/callback" /> (or your production URL)
+6. Register application
+7. Generate a **Client Secret**
+8. Copy the **Client ID** and **Client Secret**
+
+## Implementation
+
+<Steps>
+ 
+<Step> Install packages </Step>
+
+- #### Dependencies
+
+<PackageManagerTabs command="npm install passport passport-google-oauth20 dotenv" />
+
+- #### TypeScript types
+
+<PackageManagerTabs
+  command="npm install -D @types/passport @types/passport-google-oauth20
+"
+/>
+
+<Step>Setup Environment variables </Step>
+
+Add the following to your <Code children=".env" /> file:
+
+```bash
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+GOOGLE_REDIRECT_URI="your-google-redirect-uri"
+```
+
+<Step>Setup Environment Configuration </Step>
+
+<Code children="src/configs/env.ts" />
+
+```ts
+import "dotenv/config";
+
+interface Config {
+  PORT: number;
+  NODE_ENV: string;
+  LOG_LEVEL: string;
+
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  GOOGLE_REDIRECT_URI: string;
+}
+
+const env: Config = {
+  PORT: Number(process.env.PORT) || 1111,
+  NODE_ENV: process.env.NODE_ENV || "development",
+  LOG_LEVEL: process.env.LOG_LEVEL || "info",
+
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID!,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET!,
+  GOOGLE_REDIRECT_URI: process.env.GOOGLE_REDIRECT_URI!
+};
+
+export default env;
+```
+
+<Step>Configure Passport with Google Strategy</Step>
+
+<Code children="src/configs/passport.ts" />
+
+```ts
+import passport from "passport";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import env from "./env";
+
+const clientID = env.GOOGLE_CLIENT_ID;
+const clientSecret = env.GOOGLE_CLIENT_SECRET;
+const callbackURL = env.GOOGLE_REDIRECT_URI;
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID,
+      clientSecret,
+      callbackURL
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      return cb(null, profile);
+    }
+  )
+);
+```
+
+<Step>Configure OAuth controller</Step>
+
+<Code children="src/controllers/oauth.controller.ts" /> **or**
+<Code children="src/controllers/auth.controller.ts" />
+
+```ts
+import { NextFunction, Request, Response } from "express";
+import { Profile } from "passport-google-oauth20";
+
+import { ApiResponse } from "../utils/api-response";
+import { AsyncHandler } from "../utils/async-handler";
+import { ApiError } from "../utils/api-error";
+
+//? login with google
+export const googleOAuth = AsyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const data = req.user as Profile | undefined;
+    const user = data?._json;
+
+    if (!user || !data) {
+      return next(ApiError.unauthorized("Authenticated failed!"));
+    }
+
+    const user = {
+      provider: data?.provider,
+      providerId: data.id,
+      name: data.displayName,
+      email: data?.emails && data?.emails[0]?.value,
+      isEmailVerified: data?.emails && data?.emails[0]?.verified,
+      avatar: data.profileUrl || (data.photos && data.photos[0].value)
+    };
+
+    //? save the data into your databases
+
+    ApiResponse.ok(res, "Auth Successfull", {
+      user
+    });
+  }
+);
+```
+
+<Step>Configure OAuth routes</Step>
+
+<Code children="src/routes/oauth.routes.ts" /> **or**
+<Code children="src/routes/auth.routes.ts" />
+
+```ts
+import { Router } from "express";
+import passport from "passport";
+
+import { googleOAuth } from "../controllers/google-oauth.controller";
+
+const router = Router();
+
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["email", "profile", "openid"],
+    prompt: "consent"
+  })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/login", //? redirect route if authenticated is failed
+    session: false
+  }),
+  googleOAuth
+);
+
+export default router;
+```
+
+<Step>Mount routes</Step>
+
+<Code children="src/routes/index.ts" />
+
+```ts
+import { Router } from "express";
+import OAuthRoutes from "./oauth.routes";
+
+const router = Router();
+
+router.use("/oauth", OAuthRoutes);
+
+export default router;
+```
+
+<Step>Initialize passport</Step>
+
+<Code children="src/app.ts" />
+
+```ts
+import "./configs/passport";
+```
+
+```ts {8}
+import express, { Express, Request, Response } from "express";
+
+import { notFoundHandler } from "./middlewares/not-found-handler";
+import { errorHandler } from "./middlewares/error-handler";
+
+import Routes from "./routes/index";
+
+import "./configs/passport";
+
+const app: Express = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use("/api", Routes);
+
+// Not found handler (should be after routes)
+app.use(notFoundHandler);
+
+// Global error handler (should be last)
+app.use(errorHandler);
+
+export default app;
+```
+
+</Steps>
+
+## Success Response
+
+```json
+{
+  "success": true,
+  "message": "Auth Successfull",
+  "statusCode": 200,
+  "data": {
+    "user": {
+      "provider": "google",
+      "providerId": "1163181840105620881",
+      "name": "Akkal Dhami",
+      "email": "dhamiakkal21@gmail.com",
+      "isEmailVerified": true,
+      "avatar": "https://lh3.googleusercontent.com/..."
+    }
+  }
+}
+```
+
+## CLI
+
+<PackageManagerTabs command="npx servercn-cli add oauth" />
