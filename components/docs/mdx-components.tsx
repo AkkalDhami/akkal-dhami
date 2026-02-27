@@ -4,7 +4,6 @@ import { Pre } from "./pre";
 import PackageManagerTabs from "./package-manager-tabs";
 import Code from "./custom-code";
 import Note from "./note";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 
 export const mdxComponents: MDXComponents = {
@@ -28,7 +27,7 @@ export const mdxComponents: MDXComponents = {
   p: props => <p className="text-muted-primary my-2 leading-7" {...props} />,
   code: props => (
     <code
-      className="thin-scrollbar max-h-120 max-w-[272.5px] overflow-x-auto px-3 py-2.5 font-mono leading-relaxed sm:max-w-180"
+      className="thin-scrollbar max-h-120 max-w-[272.5px] overflow-x-auto px-3 py-2.5 font-mono leading-relaxed sm:max-w-full"
       {...props}
     />
   ),
@@ -51,7 +50,7 @@ export const mdxComponents: MDXComponents = {
   strong: props => <strong className="text-primary" {...props} />,
   blockquote: ({ className, ...props }: React.ComponentProps<"blockquote">) => (
     <blockquote
-      className={cn("mt-6 border-l-2 pl-6 italic", className)}
+      className={cn("text-primary mt-6 border-l-2 pl-6 italic", className)}
       {...props}
     />
   ),

@@ -26,7 +26,7 @@ export default async function PackageManagerTabs({
       style={{
         backgroundColor: bg
       }}
-      className={"relative mt-4 max-w-[272.5px] pt-2 sm:max-w-180"}>
+      className={"relative mt-4 max-w-[272.5px] pt-2 sm:max-w-full"}>
       <CornerMarkers
         offset={9}
         hoverOffset={4}
