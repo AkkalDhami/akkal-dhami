@@ -8,6 +8,8 @@ import { fadeInUp } from "../playbook/playbook-section";
 import { stagger } from "../projects/project-section";
 import { TemplateCard } from "./template-card";
 import { GITHUB_URL } from "@/lib/constants";
+import { PrimaryButton } from "../ui/primary-button";
+import { CornerMarkers } from "../ui/corner-markers";
 
 export type ITemplate = Pick<
   Project,
@@ -108,7 +110,7 @@ export const TEMPLATE_DATA: ITemplate[] = [
   }
 ];
 
-export function TemplateSection() {
+export function TemplateSection({ home = false }: { home?: boolean }) {
   return (
     <section id="contact" className="relative py-12">
       <motion.div
@@ -130,12 +132,30 @@ export function TemplateSection() {
         whileInView="animate"
         viewport={{ once: true }}
         className="grid grid-cols-1 gap-8">
-        {TEMPLATE_DATA.map(t => (
+        {(home ? TEMPLATE_DATA.slice(0, 4) : TEMPLATE_DATA).map(t => (
           <motion.div key={t.githubUrl} variants={fadeInUp} className="group">
             <TemplateCard template={t} />
           </motion.div>
         ))}
       </motion.div>
+
+      {home && (
+        <motion.div
+          variants={stagger}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="mt-6 flex items-center justify-center">
+          <PrimaryButton
+            as="a"
+            variant="secondary"
+            href={"/templates"}
+            className="py-3">
+            View More
+            <CornerMarkers />
+          </PrimaryButton>
+        </motion.div>
+      )}
     </section>
   );
 }

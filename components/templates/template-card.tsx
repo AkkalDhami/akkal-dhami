@@ -13,6 +13,7 @@ import { SiGithub } from "react-icons/si";
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { TECH_ICONS, TechStack } from "@/utils/icon-map";
@@ -70,46 +71,58 @@ export function Links({ template }: { template: ITemplate }) {
   const baseClassName =
     "px-3 border border-neutral-500/40 bg-transparent py-2 flex items-center justify-center";
   const linkClassName =
-    "text-muted-foreground bg-muted p-2 transition-colors hover:text-foreground hover:bg-muted duration-300";
+    "text-muted-foreground bg-muted relative p-2 transition-colors hover:text-foreground hover:bg-muted duration-300";
   return (
     <div className="flex items-center gap-4">
       {template.liveUrl && (
-        <Tooltip>
-          <TooltipTrigger
-            className={baseClassName}
-            render={
-              <Link
-                href={template.liveUrl as Route}
-                target="_blank"
-                className={linkClassName}
-                title="Live Demo">
-                <LinkIcon className="size-4" />
-              </Link>
-            }
-          />
-          <TooltipContent>
-            <p>Live Demo</p>
-          </TooltipContent>
-        </Tooltip>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger
+              className={baseClassName}
+              render={
+                <Link
+                  href={template.liveUrl as Route}
+                  target="_blank"
+                  className={linkClassName}>
+                  <LinkIcon className="size-4" />
+                  <CornerMarkers
+                    offset={7}
+                    hoverOffset={0}
+                    className="group-hover:text-muted-foreground"
+                  />
+                </Link>
+              }
+            />
+            <TooltipContent>
+              <p>Live Demo</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
       {template.githubUrl && (
-        <Tooltip>
-          <TooltipTrigger
-            className={baseClassName}
-            render={
-              <Link
-                href={template.githubUrl as Route}
-                target="_blank"
-                className={linkClassName}
-                title="Source Code">
-                <SiGithub className="size-4" />
-              </Link>
-            }
-          />
-          <TooltipContent>
-            <p>Source Code</p>
-          </TooltipContent>
-        </Tooltip>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger
+              className={baseClassName}
+              render={
+                <Link
+                  href={template.githubUrl as Route}
+                  target="_blank"
+                  className={linkClassName}>
+                  <SiGithub className="size-4" />
+                  <CornerMarkers
+                    offset={7}
+                    hoverOffset={0}
+                    className="group-hover:text-muted-foreground"
+                  />
+                </Link>
+              }
+            />
+            <TooltipContent>
+              <p>Source Code</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
     </div>
   );
