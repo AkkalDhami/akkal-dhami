@@ -105,6 +105,7 @@ export function Navbar() {
               </Link>
             );
           })}
+          <CornerMarkers offset={7} hoverOffset={0} />
         </div>
 
         {/* Desktop Controls */}

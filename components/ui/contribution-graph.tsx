@@ -21,7 +21,7 @@ import {
   useContext,
   useMemo
 } from "react";
-
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { GITHUB_URL } from "@/lib/constants";
@@ -379,45 +379,45 @@ export const ContributionGraphCalendar = ({
   );
 
   return (
-    <div
-      className={cn(
-        "thin-scrollbar max-w-full overflow-x-auto overflow-y-hidden",
-        className
-      )}
-      {...props}>
-      <svg
-        className="block overflow-visible"
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
-        width={width}>
-        <title>{title}</title>
-        {!hideMonthLabels && (
-          <g className="selection:fill-selection-foreground fill-current">
-            {monthLabels.map(({ label, weekIndex }) => (
-              <text
-                dominantBaseline="hanging"
-                key={weekIndex}
-                x={(blockSize + blockMargin) * weekIndex}>
-                {label}
-              </text>
-            ))}
-          </g>
-        )}
-        {weeks.map((week, weekIndex) =>
-          week.map((activity, dayIndex) => {
-            if (!activity) {
-              return null;
-            }
+    <ScrollArea
+      aria-orientation="horizontal"
+      className={cn("max-w-full overflow-x-auto overflow-y-hidden", className)}>
+      <ScrollBar orientation="horizontal" />
+      <div {...props}>
+        <svg
+          className="block overflow-visible"
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          width={width}>
+          <title>{title}</title>
+          {!hideMonthLabels && (
+            <g className="selection:fill-selection-foreground fill-current">
+              {monthLabels.map(({ label, weekIndex }) => (
+                <text
+                  dominantBaseline="hanging"
+                  key={weekIndex}
+                  x={(blockSize + blockMargin) * weekIndex}>
+                  {label}
+                </text>
+              ))}
+            </g>
+          )}
+          {weeks.map((week, weekIndex) =>
+            week.map((activity, dayIndex) => {
+              if (!activity) {
+                return null;
+              }
 
-            return (
-              <Fragment key={`${weekIndex}-${dayIndex}`}>
-                {children({ activity, dayIndex, weekIndex })}
-              </Fragment>
-            );
-          })
-        )}
-      </svg>
-    </div>
+              return (
+                <Fragment key={`${weekIndex}-${dayIndex}`}>
+                  {children({ activity, dayIndex, weekIndex })}
+                </Fragment>
+              );
+            })
+          )}
+        </svg>
+      </div>
+    </ScrollArea>
   );
 };
 
