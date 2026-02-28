@@ -32,9 +32,7 @@ URLs should represent resources, not actions. Use nouns instead of verbs.
 - **Bad**: <Code children={"/api/getUsers"} /> , <Code children={"/api/create_user"} /> ❌
 - **Good**: <Code children={"/api/users"} /> , <Code children={"/api/users/:id"} /> ✅
 
-<Note
-  text={"REST APIs use nouns in URLs and actions are defined by HTTP methods."}
-/>
+<Note text="REST APIs use nouns in URLs and actions are defined by HTTP methods." />
 
 ### 5. Proper Use of HTTP Methods
 
@@ -55,11 +53,7 @@ Always use HTTP methods semantically to improve clarity and consistency. Each HT
 | 500  | Server Error      |
 ```
 
-<Note
-  text={
-    "Status codes help clients understand the result without parsing the response body."
-  }
-/>
+<Note text="Status codes help clients understand the result without parsing the response body." />
 
 ### 6. Consistent Response Structure
 
