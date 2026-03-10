@@ -1,48 +1,97 @@
-import { CODE_THEME_BG } from "@/lib/constants";
-import { cn } from "@/lib/utils";
-import { CheckIcon, CopyIcon } from "lucide-react";
+"use client";
 
-export default function CopyButton({
-  handleCopy,
-  copied,
-  className
+import { CheckIcon, CircleXIcon, CopyIcon } from "lucide-react";
+import type { ComponentProps } from "react";
+
+import type { CopyState } from "@/hooks/use-copy-to-clipboard";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { cn } from "@/lib/utils";
+
+export function CopyStateIcon({
+  state,
+  docs = false
 }: {
-  handleCopy: () => void;
-  copied: boolean;
-  className?: string;
+  state: CopyState;
+  docs: boolean;
 }) {
+  return state === "idle" ? (
+    <span key="idle">
+      <CopyIcon
+        size={16}
+        className={cn(
+          "transition-all",
+          "scale-100 opacity-100",
+          docs
+            ? "stroke-neutral-400 group-hover/icon:stroke-white"
+            : "stroke-muted-foreground group-hover/icon:stroke-primary"
+        )}
+      />
+    </span>
+  ) : state === "done" ? (
+    <span key="done">
+      <CheckIcon
+        size={16}
+        className={cn(
+          "stroke-primary group-hover:text-primary transition-all",
+          "scale-100 opacity-100",
+          docs
+            ? "stroke-white group-hover/icon:stroke-white"
+            : "stroke-muted-foreground group-hover/icon:stroke-primary"
+        )}
+      />
+    </span>
+  ) : state === "error" ? (
+    <span key="error">
+      <CircleXIcon
+        size={16}
+        className={cn(
+          "stroke-current text-red-500 transition-all",
+          "scale-100 opacity-100"
+        )}
+      />
+    </span>
+  ) : null;
+}
+
+export type CopyButtonProps = ComponentProps<"button"> & {
+  text: string | (() => string);
+  onCopySuccess?: (text: string) => void;
+  onCopyError?: (error: Error) => void;
+  children?: React.ReactNode;
+  docs: boolean;
+};
+
+export function CopyButton({
+  children,
+  text,
+  onCopySuccess,
+  onCopyError,
+  onClick,
+  className,
+  docs,
+  ...props
+}: CopyButtonProps) {
+  const { state, copy } = useCopyToClipboard({
+    onCopySuccess,
+    onCopyError
+  });
+
   return (
     <button
-      aria-label={copied ? "Copied" : "Copy to clipboard"}
+      onClick={e => {
+        copy(text);
+        onClick?.(e);
+      }}
       className={cn(
-        "group focus-visible:ring-ring/50 absolute right-0 flex h-auto w-9 cursor-pointer items-center justify-center transition-[color,box-shadow] outline-none hover:text-white focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed",
+        "group/icon focus-visible:ring-ring/50 text-muted-foreground hover:text-primary absolute right-0 flex cursor-pointer items-center justify-center px-1 py-1 transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed",
         "duration-100 ease-in-out",
-        copied ? "text-white" : "text-neutral-400 dark:text-neutral-400",
         "py-1",
         className
       )}
-      style={{
-        backgroundColor: CODE_THEME_BG
-      }}
-      disabled={copied}
-      onClick={handleCopy}
-      type="button">
-      <CheckIcon
-        aria-hidden="true"
-        className={cn(
-          "stroke-current transition-all group-hover:text-white",
-          copied ? "scale-100 opacity-100" : "scale-0 opacity-0"
-        )}
-        size={16}
-      />
-      <CopyIcon
-        aria-hidden="true"
-        className={cn(
-          "absolute transition-all group-hover:text-white",
-          copied ? "scale-0 opacity-0" : "scale-100 opacity-100"
-        )}
-        size={16}
-      />
+      aria-label="Copy"
+      {...props}>
+      <CopyStateIcon state={state} docs={docs} />
+      {children}
     </button>
   );
 }
