@@ -2,11 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
-import { Navbar } from "@/components/layouts/navbar";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { BackToTop } from "@/components/ui/back-to-top";
-import { Footer } from "@/components/layouts/footer";
-import { BgPattern } from "@/components/layouts/bg-pattern";
 import siteConfig from "@/lib/site";
 import { PORTFOLIO_URL, X_USERNAME } from "@/lib/constants";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -105,13 +101,7 @@ export default function RootLayout({
           disableTransitionOnChange>
           <ToastProvider position="top-center">
             <AnchoredToastProvider>
-              <main className="bg-background relative mx-auto min-h-screen max-w-4xl">
-                <Navbar />
-                <TooltipProvider>{children}</TooltipProvider>
-                <Footer />
-                <BackToTop />
-              </main>
-              <BgPattern />
+              <TooltipProvider>{children}</TooltipProvider>
             </AnchoredToastProvider>
           </ToastProvider>
         </ThemeProvider>

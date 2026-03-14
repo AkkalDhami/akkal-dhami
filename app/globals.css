@@ -40,6 +40,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-edge: var(--edge);
 
   --font-sans: Geist, sans-serif;
   --font-serif: Georgia, serif;
@@ -89,6 +90,7 @@
   --destructive: #e54b4f;
   --destructive-foreground: #ffffff;
   --border: #e4e4e4;
+  --edge: color-mix(in oklab, var(--border) 94%, var(--background));
   --border-hover: var(--color-neutral-400);
   --input: #ebebeb;
   --ring: #000000;
@@ -156,6 +158,7 @@
   --destructive: #ff5b5b;
   --destructive-foreground: #000000;
   --border: #242424;
+  --edge: #242424;
   --border-hover: var(--color-neutral-600);
   --input: #333333;
   --ring: #a4a4a4;
@@ -252,6 +255,21 @@ html {
   scroll-behavior: smooth;
 }
 
+@utility screen-line-before {
+  @apply before:bg-edge relative before:absolute before:top-0 before:-left-[100vw] before:-z-1 before:h-px before:w-[200vw];
+}
+
+@utility hor-before {
+  @apply before:absolute before:h-full before:w-12 before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] before:bg-size-[10px_10px] before:[--pattern-foreground:var(--color-edge)]/56;
+}
+
+@utility hor-after {
+  @apply after:absolute after:h-full after:w-12 after:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] after:bg-size-[10px_10px] after:[--pattern-foreground:var(--color-edge)]/56;
+}
+
+@utility screen-line-after {
+  @apply after:bg-edge relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-1 after:h-px after:w-[200vw];
+}
 
 @utility step {
   counter-increment: step;
@@ -262,22 +280,21 @@ html {
   }
 }
 
-
 @layer components {
   .steps {
     &:first-child {
       @apply mt-0;
     }
 
-    &:first-child>h3:first-child {
+    &:first-child > h3:first-child {
       @apply mt-0;
     }
 
-    >h3 {
+    > h3 {
       @apply mt-8;
     }
 
-    >h3+p {
+    > h3 + p {
       @apply mt-2;
     }
   }
@@ -293,7 +310,7 @@ html {
     counter-reset: line;
   }
 
-  code>[data-line]::before {
+  code > [data-line]::before {
     counter-increment: line;
     content: counter(line);
 
@@ -306,7 +323,6 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-
   code[data-theme*=" "],
   code[data-theme*=" "] span {
     color: var(--shiki-dark);
@@ -316,4 +332,20 @@ html {
 
 [data-highlighted-line] {
   background-color: var(--color-neutral-600);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 0px;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
