@@ -75,11 +75,11 @@ const DEFAULT_LABELS: Labels = {
 };
 
 const THEME = cn(
-  'data-[level="0"]:fill-neutral-500/5',
-  'data-[level="1"]:fill-green-500/20',
-  'data-[level="2"]:fill-green-500/40',
-  'data-[level="3"]:fill-green-500/60',
-  'data-[level="4"]:fill-green-500/80'
+  'data-[level="0"]:fill-muted-foreground/5',
+  'data-[level="1"]:fill-muted-foreground/20',
+  'data-[level="2"]:fill-muted-foreground/40',
+  'data-[level="3"]:fill-muted-foreground/60',
+  'data-[level="4"]:fill-muted-foreground/80'
 );
 
 type ContributionGraphContextType = {
@@ -324,7 +324,7 @@ export const ContributionGraphBlock = ({
   className,
   ...props
 }: ContributionGraphBlockProps) => {
-  const { blockSize, blockMargin, blockRadius, labelHeight, maxLevel } =
+  const { blockSize, blockMargin, labelHeight, maxLevel } =
     useContributionGraph();
 
   if (activity.level < 0 || activity.level > maxLevel) {
@@ -340,8 +340,8 @@ export const ContributionGraphBlock = ({
       data-date={activity.date}
       data-level={activity.level}
       height={blockSize}
-      rx={blockRadius}
-      ry={blockRadius}
+      rx={0}
+      ry={0}
       width={blockSize}
       x={(blockSize + blockMargin) * weekIndex}
       y={labelHeight + (blockSize + blockMargin) * dayIndex}

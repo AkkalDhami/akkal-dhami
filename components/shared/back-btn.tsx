@@ -13,7 +13,7 @@ export function BackButton() {
         router.back();
       }}
       variant="secondary"
-      className="group relative px-4 py-2">
+      className="group relative px-3 py-2">
       <div className="flex items-center gap-2">
         <ArrowLeft className="transition-all group-hover:-translate-x-1" /> Go
         Back

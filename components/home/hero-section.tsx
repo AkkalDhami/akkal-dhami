@@ -11,8 +11,8 @@ import { TechBadge } from "@/components/projects/tech-badge";
 import { HOME_PAGE_STACKS } from "@/utils/stack";
 import { NAME } from "@/lib/constants";
 import { Route } from "next";
-import { BlurText } from "../ui/blur-text";
-import { SplitText } from "../ui/split-text";
+import { BlurText } from "@/components/ui/blur-text";
+import { SplitText } from "@/components/ui/split-text";
 
 const HERO_WORDS = [
   "systems that scale under pressure.",
@@ -29,17 +29,9 @@ const fadeUp = {
 
 export function HeroSection() {
   return (
-    <section
-      id="about"
-      className="relative z-10 mb-12 pt-20 font-sans font-normal">
-      <div className="mt-4 sm:mt-8">
+    <section id="about" className="relative pt-16 pb-6 font-sans font-normal">
+      <div className="mt-4 sm:mt-4">
         <div className="mb-5 flex items-baseline-last gap-2">
-          {/* <motion.h1
-            {...fadeUp}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-inter text-4xl font-medium tracking-wide uppercase sm:text-5xl lg:text-6xl xl:text-7xl">
-            {NAME}
-          </motion.h1> */}
           <BlurText
             text={NAME}
             delay={80}

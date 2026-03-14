@@ -2,10 +2,11 @@ import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 import { cn } from "@/lib/utils";
 import { STACKS } from "@/utils/stack";
 import Image from "next/image";
+import { Section } from "../ui/section";
 
-export function StackMarquee() {
+export function StackMarquee({ home = false }: { home?: boolean }) {
   return (
-    <section id="stack-marquee" className="relative py-12">
+    <Section id="stack-marquee" className={cn(home && "screen-line-before")}>
       <Marquee className="space-y-5">
         <MarqueeContent speed={70} direction="right" gradient={false}>
           {STACKS.map(s => (
@@ -18,7 +19,7 @@ export function StackMarquee() {
           ))}
         </MarqueeContent>
       </Marquee>
-    </section>
+    </Section>
   );
 }
 
