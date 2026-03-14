@@ -4,12 +4,14 @@ import { motion } from "motion/react";
 import { Heading } from "@/components/ui/heading";
 import { SubHeading } from "@/components/ui/sub-heading";
 import { Project } from "@/data/projects";
-import { fadeInUp } from "../playbook/playbook-section";
-import { stagger } from "../projects/project-section";
+import { fadeInUp } from "@/components/playbook/playbook-section";
+import { stagger } from "@/components/projects/project-section";
 import { TemplateCard } from "./template-card";
 import { GITHUB_URL } from "@/lib/constants";
-import { PrimaryButton } from "../ui/primary-button";
-import { CornerMarkers } from "../ui/corner-markers";
+import { PrimaryButton } from "@/components/ui/primary-button";
+import { CornerMarkers } from "@/components/ui/corner-markers";
+import { Section } from "@/components/ui/section";
+import { cn } from "@/lib/utils";
 
 export type ITemplate = Pick<
   Project,
@@ -112,13 +114,13 @@ export const TEMPLATE_DATA: ITemplate[] = [
 
 export function TemplateSection({ home = false }: { home?: boolean }) {
   return (
-    <section id="contact" className="relative py-12">
+    <Section id="contact" className={cn(home && "screen-line-before")}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="mb-12">
+        className="mb-8">
         <Heading>Templates</Heading>
         <SubHeading className="text-muted-foreground mx-0 max-w-2xl text-lg">
           A curated collection of beautiful portfolio templates and modern
@@ -131,7 +133,7 @@ export function TemplateSection({ home = false }: { home?: boolean }) {
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
-        className="grid grid-cols-1 gap-8">
+        className="grid grid-cols-1 gap-6">
         {(home ? TEMPLATE_DATA.slice(0, 4) : TEMPLATE_DATA).map(t => (
           <motion.div key={t.githubUrl} variants={fadeInUp} className="group">
             <TemplateCard template={t} />
@@ -156,6 +158,6 @@ export function TemplateSection({ home = false }: { home?: boolean }) {
           </PrimaryButton>
         </motion.div>
       )}
-    </section>
+    </Section>
   );
 }

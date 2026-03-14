@@ -10,6 +10,8 @@ import {
   TOOLS_STACKS
 } from "@/utils/stack";
 import { SkillCategoryCard } from "./skill-category";
+import { Section } from "../ui/section";
+import { cn } from "@/lib/utils";
 
 const stagger = {
   animate: {
@@ -42,15 +44,15 @@ const skills = [
   }
 ];
 
-export function SkillsSection() {
+export function SkillsSection({ home = false }: { home?: boolean }) {
   return (
-    <section id="skills" className="relative py-12">
+    <Section id="skills" className={cn(home && "screen-line-before")}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="mb-12">
+        className="mb-8">
         <Heading>Skills & Technologies</Heading>
         <SubHeading className="mx-0 max-w-2xl">
           A collection of skills and technologies that I have acquired over the
@@ -68,6 +70,6 @@ export function SkillsSection() {
           <SkillCategoryCard key={index} {...skill} />
         ))}
       </motion.div>
-    </section>
+    </Section>
   );
 }
