@@ -6,6 +6,8 @@ import { SubHeading } from "@/components/ui/sub-heading";
 import { PROJECTS } from "@/data/projects";
 import { ProjectCard } from "@/components/projects/project-card";
 import { PrimaryButton } from "@/components/ui/primary-button";
+import { Section } from "../ui/section";
+import { cn } from "@/lib/utils";
 
 const fadeInUp = {
   initial: { y: 40, opacity: 0 },
@@ -35,13 +37,13 @@ export function ProjectsSection({
   home?: boolean;
 }) {
   return (
-    <section id="projects" className="min-h-screen py-12">
+    <Section id="projects" className={cn(home && "screen-line-before")}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="mb-12">
+        className="mb-8">
         <Heading> Featured Projects</Heading>
         <SubHeading className="text-muted-foreground mx-0 max-w-2xl text-lg">
           A collection of projects that showcase my skills in modern web
@@ -67,11 +69,11 @@ export function ProjectsSection({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="my-12">
+        className="mt-8">
         <PrimaryButton className="w-full cursor-default text-xs sm:text-sm">
           More Projects under Development
         </PrimaryButton>
       </motion.div>
-    </section>
+    </Section>
   );
 }

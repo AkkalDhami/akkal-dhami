@@ -42,7 +42,7 @@ export function ProjectCard({
               src={project.thumbnail}
               alt={project.title}
               fill
-              className="object-cover transition-transform duration-500"
+              className="w-full object-cover transition-transform duration-500"
             />
           </Link>
 

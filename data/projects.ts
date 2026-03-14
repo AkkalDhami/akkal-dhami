@@ -17,9 +17,9 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     slug: "servercn",
-    title: "ServerCN",
+    title: "Servercn",
     description:
-      "ServerCN is a component registry for building Node.js backends by composition.",
+      "Servercn is a component registry for building Node.js backends by composition.",
     technologies: [
       { name: "React" },
       { name: "Nodejs" },
